@@ -61,7 +61,6 @@ public class VideoListActivity extends AppCompatActivity {
         binding.videoRecycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new VideoListAdapter();
         binding.videoRecycler.setAdapter(adapter);
-
     }
 
     private void updateData(){
