@@ -3,7 +3,7 @@ package com.micra.videoplayermicra.utils;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.micra.videoplayermicra.Model.Folder;
+import com.micra.videoplayermicra.model.Folder;
 
 import java.util.List;
 

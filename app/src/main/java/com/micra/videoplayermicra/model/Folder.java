@@ -1,10 +1,13 @@
-package com.micra.videoplayermicra.Model;
+package com.micra.videoplayermicra.model;
 
 public class Folder {
     private String bucket;
     private String data;
     private String size;
     private String bid;
+
+    public Folder() {
+    }
 
     public Folder(String bucket, String data, String size, String bid) {
         this.bucket = bucket;

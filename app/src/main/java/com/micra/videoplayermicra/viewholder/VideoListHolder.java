@@ -2,7 +2,7 @@ package com.micra.videoplayermicra.viewholder;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.micra.videoplayermicra.Model.Folder;
+import com.micra.videoplayermicra.model.Folder;
 import com.micra.videoplayermicra.databinding.VideoListItemBinding;
 
 public class VideoListHolder extends RecyclerView.ViewHolder {

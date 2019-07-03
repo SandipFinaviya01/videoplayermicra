@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.micra.videoplayermicra.Model.Folder;
+import com.micra.videoplayermicra.model.Folder;
 import com.micra.videoplayermicra.R;
 import com.micra.videoplayermicra.databinding.VideoListItemBinding;
 import com.micra.videoplayermicra.utils.EmployeeDiffCallback;
