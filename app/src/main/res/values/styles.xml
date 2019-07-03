@@ -1,11 +1,94 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/themeColor</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/themeColor</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/themeColor</item>
+        <item name="actionModeCloseDrawable">@drawable/cancel</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="control" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorBackground">#50000000</item>
+    </style>
+
+    <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorAccent</item>
+    </style>
+
+    <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
+    </style>
+
+    <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="Play" parent="@style/ExoMediaButton.Play">
+        <item name="android:src">@drawable/play</item>
+        <item name="android:contentDescription">@string/exo_controls_play_description</item>
+    </style>
+
+
+    <style name="Pause" parent="@style/ExoMediaButton.Pause">
+        <item name="android:src">@drawable/pause</item>
+        <item name="android:contentDescription">@string/exo_controls_pause_description</item>
+    </style>
+
+    <style name="Next" parent="@style/ExoMediaButton.Next">
+        <item name="android:src">@drawable/next</item>
+        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+    </style>
+
+
+    <style name="Previous" parent="@style/ExoMediaButton.Previous">
+        <item name="android:src">@drawable/previous</item>
+        <item name="android:contentDescription">@string/exo_controls_previous_description</item>
+    </style>
+
+    <style name="Rewind" parent="@style/ExoMediaButton.Rewind">
+        <item name="android:src">@drawable/rewind</item>
+        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+    </style>
+
+
+    <style name="Forward" parent="@style/ExoMediaButton.FastForward">
+        <item name="android:src">@drawable/forward</item>
+        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+    </style>
+
+    <style name="Volume" parent="@style/ExoMediaButton">
+        <item name="android:src">@drawable/volume</item>
+    </style>
+
+    <style name="Full" parent="@style/ExoMediaButton">
+        <item name="android:src">@drawable/full</item>
+    </style>
+
+    <style name="Close" parent="@style/ExoMediaButton">
+        <item name="android:src">@drawable/popup_close</item>
+    </style>
+
+    <style name="Crop" parent="@style/ExoMediaButton">
+        <item name="android:src">@drawable/full</item>
+    </style>
 </resources>
