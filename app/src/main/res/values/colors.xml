@@ -3,6 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#121111</color>
-    <color name="themeColor">#C0392B</color>
+    <color name="themeColor">#6CB3FC</color>
     <color name="activated">#20000000</color>
 </resources>

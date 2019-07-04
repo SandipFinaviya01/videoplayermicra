@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(MainActivity.this,VideoListActivity.class);
                 startActivity(intent);
+                finish();
             }
         },2000);
     }
