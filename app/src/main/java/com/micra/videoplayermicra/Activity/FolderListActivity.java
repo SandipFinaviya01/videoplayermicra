@@ -28,7 +28,7 @@ import com.micra.videoplayermicra.viewholder.VideoListHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoListActivity extends AppCompatActivity implements VideoListHolder.OnVideoListListner {
+public class FolderListActivity extends AppCompatActivity implements VideoListHolder.OnVideoListListner {
     ActivityVideoListBinding binding;
     private static final int PERMISSION_REQUEST_CODE = 1;
     List<Folder> folderList = new ArrayList<>();
@@ -48,10 +48,10 @@ public class VideoListActivity extends AppCompatActivity implements VideoListHol
         });
 
         if (Build.VERSION.SDK_INT >= 23) {
-            if (checkPermission(VideoListActivity.this)) {
+            if (checkPermission(FolderListActivity.this)) {
                 updateData();
             } else {
-                requestPermission(VideoListActivity.this);
+                requestPermission(FolderListActivity.this);
             }
         } else {
             updateData();
@@ -98,7 +98,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListHol
     }
 
     private void checkSetPer() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(VideoListActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(FolderListActivity.this);
         builder.setTitle("Need Permissions");
         builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
         builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {

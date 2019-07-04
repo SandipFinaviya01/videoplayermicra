@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-       <!-- <activity android:name=".Activity.VideoListActivity"
+       <!-- <activity android:name=".Activity.FolderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -40,7 +40,8 @@
                 <data android:mimeType="video/*" />
             </intent-filter>
         </activity>-->
-        <activity android:name=".Activity.VideoListActivity"
+        <activity
+            android:name=".Activity.FolderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/AppTheme">
             <intent-filter>
