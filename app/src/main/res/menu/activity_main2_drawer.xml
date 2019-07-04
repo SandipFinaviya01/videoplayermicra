@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/vfolder"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/folder"
+        android:title="Video folders" />
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_theme"
+            android:icon="@drawable/theme"
+            android:title="Theme" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share app" />
+        <item
+            android:id="@+id/nav_policy"
+            android:icon="@drawable/lpolicy"
+            android:title="Legal policy" />
+
+    </group>
+
+</menu>

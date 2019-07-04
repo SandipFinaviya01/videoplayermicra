@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.VideoListActivity"></activity>
+        <activity android:name=".Activity.VideoListActivity"
+            android:theme="@style/AppTheme"/>
         <!--
          <activity android:name=".Activity.FolderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"

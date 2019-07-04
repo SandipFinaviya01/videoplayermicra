@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
+    <item
+        android:id="@+id/toggle"
+        android:icon="@drawable/grid"
+        android:title="Grid"
+        app:showAsAction="always" />
+    <item android:title="Sort by">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/dnf"
+                    android:enabled="true"
+                    android:title="Date(newest first)" />
+                <item
+                    android:id="@+id/dof"
+                    android:enabled="true"
+                    android:title="Date(oldest first)" />
+                <item
+                    android:id="@+id/dulf"
+                    android:enabled="true"
+                    android:title="Duration(longest first)" />
+                <item
+                    android:id="@+id/dusf"
+                    android:enabled="true"
+                    android:title="Duration(shortest first)" />
+                <item
+                    android:id="@+id/faz"
+                    android:enabled="true"
+                    android:title="File(A to Z)" />
+                <item
+                    android:id="@+id/fza"
+                    android:enabled="true"
+                    android:title="File(Z to A)" />
+                <item
+                    android:id="@+id/slf"
+                    android:enabled="true"
+                    android:title="Size(largest first)" />
+                <item
+                    android:id="@+id/ssf"
+                    android:enabled="true"
+                    android:title="Size(smallest first)" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Refresh" />
+
+</menu>

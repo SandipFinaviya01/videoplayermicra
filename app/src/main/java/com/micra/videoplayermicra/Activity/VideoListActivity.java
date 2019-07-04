@@ -1,11 +1,16 @@
 package com.micra.videoplayermicra.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.micra.videoplayermicra.R;
@@ -25,10 +30,11 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
     private MediaQuery mediaQuery;
     private List<VideoItem> videoItemList;
     private VideoListSubAdapater videoListSubAdapater;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_video_list2);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_video_list2);
         setSupportActionBar(binding.toolbarVideoList);
         String name = getIntent().getStringExtra("name");
         binding.toolbarVideoList.setTitle(name);
@@ -46,7 +52,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
     }
 
     private void setRecylerview() {
-        videoListSubAdapater = new VideoListSubAdapater(videoItemList,this);
+        videoListSubAdapater = new VideoListSubAdapater(videoItemList, this);
         binding.recycleVideoList.setLayoutManager(new LinearLayoutManager(this));
         binding.recycleVideoList.setAdapter(videoListSubAdapater);
     }
@@ -59,6 +65,36 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
     @Override
     public void onExtraDotClick(VideoItem videoItem, ImageView anchor) {
+        MenuBuilder menuBuilder = new MenuBuilder(this);
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.detailvideopopup, menuBuilder);
+        MenuPopupHelper optionsMenu = new MenuPopupHelper(this, menuBuilder, anchor);
+        optionsMenu.setForceShowIcon(true);
 
+        // Set Item Click Listener
+        menuBuilder.setCallback(new MenuBuilder.Callback() {
+            @Override
+            public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.share:
+                        return true;
+                    case R.id.delete:
+                        return true;
+                    case R.id.properties:
+                        return true;
+                    default:
+                        return false;
+                }
+
+            }
+
+            @Override
+            public void onMenuModeChange(MenuBuilder menu) {
+            }
+        });
+
+
+        // Display the menu
+        optionsMenu.show();
     }
 }
