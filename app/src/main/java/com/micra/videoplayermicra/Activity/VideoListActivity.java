@@ -14,9 +14,12 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.micra.videoplayermicra.R;
 import com.micra.videoplayermicra.adapter.VideoListSubAdapater;
@@ -114,6 +117,24 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
                         alertDialog.show();
                         return true;
                     case R.id.properties:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(VideoListActivity.this);
+                        LayoutInflater inflater = LayoutInflater.from(VideoListActivity.this);
+                        builder.setTitle("Properties");
+                        View v1 = inflater.inflate(R.layout.properties_dialog, null);
+                        TextView t1 = v1.findViewById(R.id.filename);
+                        t1.setText(videoItem.getDISPLAY_NAME());
+                        TextView t2 = v1.findViewById(R.id.videoDuration);
+                        t2.setText(videoItem.getDURATION());
+                        TextView t3 = v1.findViewById(R.id.fileSize);
+                        t3.setText(videoItem.getSIZE());
+                        TextView t4 = v1.findViewById(R.id.fileLocation);
+                        t4.setText(videoItem.getDATA());
+                        TextView t5 = v1.findViewById(R.id.createdDate);
+                        t5.setText(videoItem.getDATE());
+                        builder.setView(v1)
+                                .setPositiveButton("OK", (dialog, id) -> {
+                                });
+                        builder.show();
                         return true;
                     default:
                         return false;
