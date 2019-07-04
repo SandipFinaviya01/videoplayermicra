@@ -11,13 +11,6 @@ public class VideoItem implements Serializable {
     private String DURATION;
     private String Bucket;
 
-    public String getBucket() {
-        return Bucket;
-    }
-
-    public void setBucket(String bucket) {
-        Bucket = bucket;
-    }
 
     public VideoItem(String _ID, String SIZE, String TITLE,
                      String DATA, String DISPLAY_NAME, String DURATION, String bucket) {
@@ -83,4 +76,11 @@ public class VideoItem implements Serializable {
         this.DURATION = DURATION;
     }
 
+    public String getBucket() {
+        return Bucket;
+    }
+
+    public void setBucket(String bucket) {
+        Bucket = bucket;
+    }
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.micra.videoplayermicra.utils.BindUtils" />
+        <variable
+            name="videoItem"
+            type="com.micra.videoplayermicra.model.VideoItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_margin="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/thumbOfImage"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:loadimage="@{}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameOfVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{videoItem.DISPLAY_NAME}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbOfImage"
+            app:layout_constraintStart_toEndOf="@+id/thumbOfImage"
+            app:layout_constraintTop_toTopOf="@+id/thumbOfImage"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Download" />
+
+        <TextView
+            android:id="@+id/durationOfVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:text="@{videoItem.DURATION}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9sdp"
+            android:paddingBottom="@dimen/_1sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:background="@drawable/time_drawable"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbOfImage"
+            app:layout_constraintEnd_toEndOf="@+id/thumbOfImage"
+            tools:text="2 video" />
+
+        <ImageView
+            android:id="@+id/extraVideoList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dots_ver" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
