@@ -23,11 +23,12 @@ import com.micra.videoplayermicra.model.Folder;
 import com.micra.videoplayermicra.R;
 import com.micra.videoplayermicra.databinding.ActivityVideoListBinding;
 import com.micra.videoplayermicra.utils.MediaQuery;
+import com.micra.videoplayermicra.viewholder.VideoListHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoListActivity extends AppCompatActivity {
+public class VideoListActivity extends AppCompatActivity implements VideoListHolder.OnVideoListListner {
     ActivityVideoListBinding binding;
     private static final int PERMISSION_REQUEST_CODE = 1;
     List<Folder> folderList = new ArrayList<>();
@@ -59,7 +60,7 @@ public class VideoListActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         binding.videoRecycler.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new VideoListAdapter();
+        adapter = new VideoListAdapter(this);
         binding.videoRecycler.setAdapter(adapter);
     }
 
@@ -115,4 +116,8 @@ public class VideoListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onVideoListItemClick(Folder folder) {
+
+    }
 }

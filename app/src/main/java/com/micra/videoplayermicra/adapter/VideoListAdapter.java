@@ -20,8 +20,10 @@ import java.util.List;
 public class VideoListAdapter extends RecyclerView.Adapter {
     private List<Folder> folderList = new ArrayList<>();
     private VideoListItemBinding videoListItemBinding;
-    public VideoListAdapter() {
+    private VideoListHolder.OnVideoListListner videoListListner;
+    public VideoListAdapter(VideoListHolder.OnVideoListListner videoListListner) {
         this.folderList = new ArrayList<>();
+        this.videoListListner = videoListListner;
     }
 
     public void updateEmployeeListItems(List<Folder> folders) {
@@ -38,7 +40,7 @@ public class VideoListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         videoListItemBinding = DataBindingUtil.inflate(inflater, R.layout.video_list_item,parent,false);
-        return new VideoListHolder(videoListItemBinding);
+        return new VideoListHolder(videoListItemBinding,videoListListner);
     }
 
     @Override
