@@ -45,4 +45,10 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     public int getItemCount() {
         return videoItemList != null?videoItemList.size():0;
     }
+
+    public void remove(int position) {
+        videoItemList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, videoItemList.size());
+    }
 }

@@ -11,7 +11,7 @@ import com.micra.videoplayermicra.model.VideoItem;
 public class VideoListSubHolder extends RecyclerView.ViewHolder {
     private VideoListItem2Binding binding;
     public interface OnVideoCellListner{
-        void onExtraDotClick(VideoItem videoItem, ImageView imageView);
+        void onExtraDotClick(VideoItem videoItem, ImageView imageView,int position);
     }
     private OnVideoCellListner videoCellListner;
     public VideoListSubHolder(VideoListItem2Binding binding,OnVideoCellListner videoCellListner) {
@@ -25,7 +25,7 @@ public class VideoListSubHolder extends RecyclerView.ViewHolder {
         binding.extraVideoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                videoCellListner.onExtraDotClick(videoItem,binding.extraVideoList);
+                videoCellListner.onExtraDotClick(videoItem,binding.extraVideoList,getAdapterPosition());
             }
         });
     }

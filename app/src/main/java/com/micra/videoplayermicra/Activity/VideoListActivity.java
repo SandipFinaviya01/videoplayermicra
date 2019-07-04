@@ -1,5 +1,6 @@
 package com.micra.videoplayermicra.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
@@ -7,10 +8,12 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -23,6 +26,7 @@ import com.micra.videoplayermicra.utils.BindUtils;
 import com.micra.videoplayermicra.utils.MediaQuery;
 import com.micra.videoplayermicra.viewholder.VideoListSubHolder;
 
+import java.io.File;
 import java.util.List;
 
 public class VideoListActivity extends AppCompatActivity implements VideoListSubHolder.OnVideoCellListner {
@@ -66,7 +70,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
     }
 
     @Override
-    public void onExtraDotClick(VideoItem videoItem, ImageView anchor) {
+    public void onExtraDotClick(VideoItem videoItem, ImageView anchor,int position) {
         MenuBuilder menuBuilder = new MenuBuilder(this);
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.detailvideopopup, menuBuilder);
@@ -87,6 +91,27 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
                         startActivity(Intent.createChooser(intent, "Share Video"));
                         return true;
                     case R.id.delete:
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(VideoListActivity.this);
+                        alertDialog.setTitle("Delete video from device?");
+                        alertDialog.setMessage("Video will be deleted permanently from device.");
+                        alertDialog.setPositiveButton("DELETE", (dialog, which) -> {
+                            File file = new File(videoItem.getDATA());
+                            final String where = MediaStore.MediaColumns.DATA + "=?";
+                            final String[] selectionArgs = new String[]{
+                                    file.getAbsolutePath()
+                            };
+                            final ContentResolver contentResolver = VideoListActivity.this.getContentResolver();
+                            final Uri filesUri = MediaStore.Files.getContentUri("external");
+
+                            contentResolver.delete(filesUri, where, selectionArgs);
+                            if (file.exists()) {
+                                contentResolver.delete(filesUri, where, selectionArgs);
+                            }
+                            videoListSubAdapater.remove(position);
+
+                        });
+                        alertDialog.setNegativeButton("CANCEL", (dialog, which) -> dialog.cancel());
+                        alertDialog.show();
                         return true;
                     case R.id.properties:
                         return true;
