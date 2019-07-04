@@ -12,13 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_55sdp"
         android:layout_margin="@dimen/_3sdp">
 
         <ImageView
             android:id="@+id/thumbOfImage"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
@@ -38,7 +38,7 @@
             android:gravity="start"
             android:text="@{videoItem.DISPLAY_NAME}"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="@+id/thumbOfImage"
             app:layout_constraintEnd_toStartOf="@+id/extraVideoList"
             app:layout_constraintStart_toEndOf="@+id/thumbOfImage"
@@ -73,6 +73,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/dots_ver" />
-
+        <View
+            android:id="@+id/devider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@color/activated"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbOfImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

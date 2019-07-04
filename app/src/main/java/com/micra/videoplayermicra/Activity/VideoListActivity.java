@@ -47,4 +47,10 @@ public class VideoListActivity extends AppCompatActivity {
         binding.recycleVideoList.setLayoutManager(new LinearLayoutManager(this));
         binding.recycleVideoList.setAdapter(videoListSubAdapater);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

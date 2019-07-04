@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/app_name"
             app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@color/colorAccent" />
+            app:titleTextColor="@color/white" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshVideoList"
