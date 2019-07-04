@@ -20,9 +20,11 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
 
     private List<VideoItem> videoItemList = new ArrayList<>();
     private VideoListItem2Binding videoListItem2Binding;
+    private VideoListSubHolder.OnVideoCellListner onVideoCellListner;
 
-    public VideoListSubAdapater(List<VideoItem> videoItemList) {
+    public VideoListSubAdapater(List<VideoItem> videoItemList,VideoListSubHolder.OnVideoCellListner onVideoCellListner) {
         this.videoItemList = videoItemList;
+        this.onVideoCellListner = onVideoCellListner;
     }
 
     @NonNull
@@ -30,7 +32,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         videoListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.video_list_item2,parent,false);
-        return new VideoListSubHolder(videoListItem2Binding);
+        return new VideoListSubHolder(videoListItem2Binding,onVideoCellListner);
     }
 
     @Override
