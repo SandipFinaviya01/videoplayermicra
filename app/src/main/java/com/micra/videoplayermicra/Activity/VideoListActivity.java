@@ -7,7 +7,9 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,6 +79,12 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
             public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.share:
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("video/*");
+                        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(videoItem.getDATA()));
+                        intent.putExtra(Intent.EXTRA_TEXT, videoItem.getDISPLAY_NAME());
+                        intent.putExtra(Intent.EXTRA_SUBJECT, videoItem.getDISPLAY_NAME());
+                        startActivity(Intent.createChooser(intent, "Share Video"));
                         return true;
                     case R.id.delete:
                         return true;
