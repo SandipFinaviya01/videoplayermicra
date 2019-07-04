@@ -14,7 +14,7 @@ public class BindUtils {
     @BindingAdapter("loadimage")
     public static void loadImageRadius(ImageView imageView,String url){
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transform(new CenterCrop(), new RoundedCorners(16));
+        requestOptions = requestOptions.transform(new CenterCrop(), new RoundedCorners(10));
         Glide.with(imageView.getContext())
                 .load(url)
                 .apply(requestOptions)

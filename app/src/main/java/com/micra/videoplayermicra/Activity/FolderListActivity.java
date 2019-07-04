@@ -118,6 +118,9 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
 
     @Override
     public void onVideoListItemClick(Folder folder) {
-
+        Intent intent = new Intent(this, VideoListActivity.class);
+        intent.putExtra("id", folder.getBid());
+        intent.putExtra("name", folder.getBucket());
+        startActivity(intent);
     }
 }
