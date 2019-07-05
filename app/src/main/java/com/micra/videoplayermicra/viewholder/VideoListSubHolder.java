@@ -16,6 +16,10 @@ public class VideoListSubHolder extends RecyclerView.ViewHolder {
         return binding;
     }
 
+    public void ChechChange(boolean b) {
+        binding.deleteCheck.setChecked(b);
+    }
+
     public interface OnVideoCellListner{
         void onExtraDotClick(VideoItem videoItem, ImageView imageView,int position);
 

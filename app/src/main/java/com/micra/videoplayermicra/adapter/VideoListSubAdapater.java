@@ -1,6 +1,9 @@
 package com.micra.videoplayermicra.adapter;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,12 +26,14 @@ import com.micra.videoplayermicra.model.VideoItem;
 import com.micra.videoplayermicra.viewholder.VideoListHolder;
 import com.micra.videoplayermicra.viewholder.VideoListSubHolder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VideoListSubAdapater extends RecyclerView.Adapter {
 
     private List<VideoItem> videoItemList = new ArrayList<>();
+    private List<VideoItem> videoItemFilterList = new ArrayList<>();
     private VideoListItem2Binding videoListItem2Binding;
     private VideoListItem2Binding binding;
     private VideoListSubHolder.OnVideoCellListner onVideoCellListner;
@@ -39,6 +44,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
 
     public VideoListSubAdapater(List<VideoItem> videoItemList,VideoListSubHolder.OnVideoCellListner onVideoCellListner) {
         this.videoItemList = videoItemList;
+        this.videoItemFilterList = videoItemList;
         this.onVideoCellListner = onVideoCellListner;
     }
 
@@ -53,7 +59,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         VideoListSubHolder vlsh = (VideoListSubHolder) holder;
-        vlsh.setItem(videoItemList.get(position),mSparseBoolMultiSelect.get(position));
+        vlsh.setItem(videoItemFilterList.get(position),mSparseBoolMultiSelect.get(position));
         binding = vlsh.getBinding();
         binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -65,7 +71,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
                 }
                 action = true;
                 if (mSparseBoolMultiSelect.get(position)) {
-                    binding.deleteCheck.setChecked(false);
+                    vlsh.ChechChange(false);
                     binding.getRoot().setSelected(false);
                     mSparseBoolMultiSelect.delete(position);
                     if (mSparseBoolMultiSelect.size() == 0) {
@@ -73,7 +79,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
                         return true;
                     }
                 } else {
-                    binding.deleteCheck.setChecked(true);
+                    vlsh.ChechChange(true);
                     binding.getRoot().setSelected(true);
                     mSparseBoolMultiSelect.put(position, true);
                 }
@@ -83,6 +89,30 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
 
                 return true;
             }
+        });
+
+        binding.getRoot().setOnClickListener(v -> {
+            if (!action) {
+//                ((videolist_activity) ctx).playvideo(filteredvideoList, position);
+            } else {
+                if (mSparseBoolMultiSelect.get(position)) {
+                    v.setSelected(false);
+                    vlsh.ChechChange(false);
+                    mSparseBoolMultiSelect.delete(position);
+                    if (mSparseBoolMultiSelect.size() == 0) {
+                        mActionMode.finish();
+                        notifyDataSetChanged();
+                        return;
+                    }
+                } else {
+                    v.setSelected(true);
+                    vlsh.ChechChange(true);
+                    mSparseBoolMultiSelect.put(position, true);
+                }
+
+                mActionMode.setTitle(String.format("%d selected", mSparseBoolMultiSelect.size()));
+            }
+
         });
     }
 
@@ -132,19 +162,42 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     }
 
     private void deleteall() {
+        for (int i = 0; i < mSparseBoolMultiSelect.size(); i++) {
+            int position = mSparseBoolMultiSelect.keyAt(i);
 
+            File file = new File(videoItemFilterList.get(position).getDATA());
+            final String where = MediaStore.MediaColumns.DATA + "=?";
+            final String[] selectionArgs = new String[]{
+                    file.getAbsolutePath()
+            };
+            final ContentResolver contentResolver = ctx.getContentResolver();
+            final Uri filesUri = MediaStore.Files.getContentUri("external");
+
+            contentResolver.delete(filesUri, where, selectionArgs);
+            if (file.exists()) {
+                contentResolver.delete(filesUri, where, selectionArgs);
+            }
+        }
+
+        for (int i = videoItemList.size() - 1; i > -1; i--) {
+            if (mSparseBoolMultiSelect.get(i)) {
+                videoItemList.remove(i);
+            }
+        }
+        notifyDataSetChanged();
+        mActionMode.finish();
     }
 
 
     @Override
     public int getItemCount() {
-        return videoItemList != null?videoItemList.size():0;
+        return videoItemFilterList != null?videoItemFilterList.size():0;
     }
 
     public void remove(int position) {
-        videoItemList.remove(position);
+        videoItemFilterList.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, videoItemList.size());
+        notifyItemRangeChanged(position, videoItemFilterList.size());
     }
 
     public SparseBooleanArray getmSparseBoolMultiSelect() {
