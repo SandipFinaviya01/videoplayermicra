@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_55sdp"
-        android:layout_margin="@dimen/_3sdp">
+        android:layout_margin="@dimen/_3sdp"
+        android:background="@drawable/selected">
 
         <ImageView
             android:id="@+id/thumbOfImage"
@@ -37,7 +38,7 @@
             android:maxLines="2"
             android:gravity="start"
             android:text="@{videoItem.DISPLAY_NAME}"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="@+id/thumbOfImage"
             app:layout_constraintEnd_toStartOf="@+id/extraVideoList"

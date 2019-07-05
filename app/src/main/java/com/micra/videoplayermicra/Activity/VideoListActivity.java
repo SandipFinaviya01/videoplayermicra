@@ -2,19 +2,19 @@ package com.micra.videoplayermicra.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +25,6 @@ import com.micra.videoplayermicra.R;
 import com.micra.videoplayermicra.adapter.VideoListSubAdapater;
 import com.micra.videoplayermicra.databinding.ActivityVideoList2Binding;
 import com.micra.videoplayermicra.model.VideoItem;
-import com.micra.videoplayermicra.utils.BindUtils;
 import com.micra.videoplayermicra.utils.MediaQuery;
 import com.micra.videoplayermicra.viewholder.VideoListSubHolder;
 
@@ -39,6 +38,8 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
     private MediaQuery mediaQuery;
     private List<VideoItem> videoItemList;
     private VideoListSubAdapater videoListSubAdapater;
+    private ActionMode mActionMode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
     private void setRecylerview() {
         videoListSubAdapater = new VideoListSubAdapater(videoItemList, this);
+        videoListSubAdapater.setContext(VideoListActivity.this);
         binding.recycleVideoList.setLayoutManager(new LinearLayoutManager(this));
         binding.recycleVideoList.setAdapter(videoListSubAdapater);
     }
@@ -151,4 +153,6 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
         // Display the menu
         optionsMenu.show();
     }
+
+
 }
