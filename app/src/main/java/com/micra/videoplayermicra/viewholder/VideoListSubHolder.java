@@ -19,14 +19,16 @@ public class VideoListSubHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
         this.videoCellListner = videoCellListner;
     }
-    public void setItem(VideoItem videoItem){
+    public void setItem(VideoItem videoItem, boolean b, boolean action){
         binding.setVideoItem(videoItem);
-        binding.executePendingBindings();
+
+
         binding.extraVideoList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 videoCellListner.onExtraDotClick(videoItem,binding.extraVideoList,getAdapterPosition());
             }
         });
+        binding.executePendingBindings();
     }
 }

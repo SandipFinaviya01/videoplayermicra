@@ -1,5 +1,6 @@
 package com.micra.videoplayermicra.adapter;
 
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -21,6 +22,8 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     private List<VideoItem> videoItemList = new ArrayList<>();
     private VideoListItem2Binding videoListItem2Binding;
     private VideoListSubHolder.OnVideoCellListner onVideoCellListner;
+    private final SparseBooleanArray mSparseBoolMultiSelect = new SparseBooleanArray();
+    private boolean action = false;
 
     public VideoListSubAdapater(List<VideoItem> videoItemList,VideoListSubHolder.OnVideoCellListner onVideoCellListner) {
         this.videoItemList = videoItemList;
@@ -38,7 +41,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         VideoListSubHolder vlsh = (VideoListSubHolder) holder;
-        vlsh.setItem(videoItemList.get(position));
+        vlsh.setItem(videoItemList.get(position),mSparseBoolMultiSelect.get(position),action);
     }
 
     @Override
