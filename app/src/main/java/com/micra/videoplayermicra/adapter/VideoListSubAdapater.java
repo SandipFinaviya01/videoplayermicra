@@ -42,7 +42,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     private ActionMode mActionMode;
     private Context ctx;
 
-    public VideoListSubAdapater(List<VideoItem> videoItemList,VideoListSubHolder.OnVideoCellListner onVideoCellListner) {
+    public VideoListSubAdapater(List<VideoItem> videoItemList, VideoListSubHolder.OnVideoCellListner onVideoCellListner) {
         this.videoItemList = videoItemList;
         this.videoItemFilterList = videoItemList;
         this.onVideoCellListner = onVideoCellListner;
@@ -52,14 +52,14 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        videoListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.video_list_item2,parent,false);
-        return new VideoListSubHolder(videoListItem2Binding,onVideoCellListner);
+        videoListItem2Binding = DataBindingUtil.inflate(inflater, R.layout.video_list_item2, parent, false);
+        return new VideoListSubHolder(videoListItem2Binding, onVideoCellListner);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         VideoListSubHolder vlsh = (VideoListSubHolder) holder;
-        vlsh.setItem(videoItemFilterList.get(position),mSparseBoolMultiSelect.get(position));
+        vlsh.setItem(videoItemFilterList.get(position), mSparseBoolMultiSelect.get(position));
         binding = vlsh.getBinding();
         binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
 
         binding.getRoot().setOnClickListener(v -> {
             if (!action) {
-//                ((videolist_activity) ctx).playvideo(filteredvideoList, position);
+                ((VideoListSubHolder) holder).getVideoCellListner().onVideoItemClick(videoItemFilterList,position);
             } else {
                 if (mSparseBoolMultiSelect.get(position)) {
                     v.setSelected(false);
@@ -191,7 +191,7 @@ public class VideoListSubAdapater extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return videoItemFilterList != null?videoItemFilterList.size():0;
+        return videoItemFilterList != null ? videoItemFilterList.size() : 0;
     }
 
     public void remove(int position) {

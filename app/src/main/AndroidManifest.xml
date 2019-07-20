@@ -17,8 +17,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.VideoListActivity"
-            android:theme="@style/AppTheme"/>
+        <activity android:name=".Activity.VideoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="rtsp" />
+            </intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="application/sdp" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:mimeType="video/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.VideoListActivity"
+            android:theme="@style/AppTheme" />
         <!--
          <activity android:name=".Activity.FolderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
@@ -62,7 +86,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="all.format.video.player.videoplayer.music.free.online.hd"
+            android:authorities="all.format.video.hdplayer.hdvideoplayer.music.free.online.hd"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -73,6 +97,9 @@
         <meta-data
             android:name="android.app.searchable"
             android:resource="@xml/searchable" />
-    </application>
+        <service android:name=".services.floating"
+            android:enabled="true"
+            android:exported="false" />
+</application>
 
 </manifest>

@@ -9,6 +9,8 @@ import com.micra.videoplayermicra.adapter.VideoListSubAdapater;
 import com.micra.videoplayermicra.databinding.VideoListItem2Binding;
 import com.micra.videoplayermicra.model.VideoItem;
 
+import java.util.List;
+
 public class VideoListSubHolder extends RecyclerView.ViewHolder {
     private VideoListItem2Binding binding;
 
@@ -22,8 +24,13 @@ public class VideoListSubHolder extends RecyclerView.ViewHolder {
 
     public interface OnVideoCellListner{
         void onExtraDotClick(VideoItem videoItem, ImageView imageView,int position);
-
+        void onVideoItemClick(List<VideoItem> videoItemFilterList, int position);
     }
+
+    public OnVideoCellListner getVideoCellListner() {
+        return videoCellListner;
+    }
+
     private OnVideoCellListner videoCellListner;
     public VideoListSubHolder(VideoListItem2Binding binding,OnVideoCellListner videoCellListner) {
         super(binding.getRoot());

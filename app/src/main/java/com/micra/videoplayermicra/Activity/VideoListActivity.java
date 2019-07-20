@@ -154,5 +154,10 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
         optionsMenu.show();
     }
 
+    @Override
+    public void onVideoItemClick(List<VideoItem> videoItemFilterList, int position) {
+
+    }
+
 
 }
