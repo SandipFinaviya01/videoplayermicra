@@ -29,6 +29,7 @@ import com.micra.videoplayermicra.utils.MediaQuery;
 import com.micra.videoplayermicra.viewholder.VideoListSubHolder;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
 public class VideoListActivity extends AppCompatActivity implements VideoListSubHolder.OnVideoCellListner {
@@ -156,6 +157,10 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
     @Override
     public void onVideoItemClick(List<VideoItem> videoItemFilterList, int position) {
+        Intent my = new Intent(VideoListActivity.this, VideoPlayerActivity.class);
+        my.putExtra("list", (Serializable) videoItemFilterList);
+        my.putExtra("position", position);
+        startActivity(my);
 
     }
 

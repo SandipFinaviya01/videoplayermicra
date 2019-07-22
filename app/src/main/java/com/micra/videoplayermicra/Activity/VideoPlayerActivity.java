@@ -46,6 +46,7 @@ import com.micra.videoplayermicra.adapter.playlist_adapter;
 import com.micra.videoplayermicra.databinding.ActivityVideoPlayerBinding;
 import com.micra.videoplayermicra.model.VideoItem;
 import com.micra.videoplayermicra.services.floating;
+import com.micra.videoplayermicra.utils.OnSwipeTouchListener;
 import com.micra.videoplayermicra.utils.PreferenceUtil;
 
 import java.io.Serializable;
@@ -117,6 +118,21 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         setBottomSheet();
         setListner();
         setdata();
+
+        player.addListener(new Player.EventListener() {
+            @Override
+            public void onPositionDiscontinuity(int reason) {
+                int change = player.getCurrentWindowIndex();
+                if (change != position) {
+                    position = change;
+                    title.setText(list.get(change).DISPLAY_NAME);
+                    bottomSheetDialog.dismiss();
+                }
+            }
+        });
+
+        binding.playerView.setOnTouchListener(new OnSwipeTouchListener(this, player, binding.playerView, audioManager));
+
     }
 
     private void setdata() {
@@ -132,10 +148,10 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 
         if (list != null) {
             title.setText(list.get(position).DISPLAY_NAME);
-        } else title.setText(uri2filename());
+        } else title.setText(fileNameFromUri());
     }
 
-    private String uri2filename() {
+    private String fileNameFromUri() {
 
         String ret = "";
         String scheme = getIntent().getData().getScheme();
@@ -248,7 +264,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         speedv = PreferenceUtil.getInstance(this).getLastSpeed();
         Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        realDisplayMetrics = new DisplayMetrics();
         display.getRealMetrics(realDisplayMetrics);
     }
 
@@ -298,6 +314,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
             handleRotate();
         }else if (v == popup){
             handlePopUp();
+        }else if (v == playlist){
+            bottomSheetDialog.show();
         }
     }
 
@@ -486,6 +504,14 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int change = getResources().getConfiguration().orientation;
+        if (change == Configuration.ORIENTATION_LANDSCAPE) titleland();
+        else if (change == Configuration.ORIENTATION_PORTRAIT) titlepot();
+    }
+
+    @Override
     protected void onPause() {
         if (lockstatus) {
             unlock();
@@ -503,5 +529,45 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 
         super.onBackPressed();
     }
+
+
+    private void checkSetPer() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(VideoPlayerActivity.this);
+        builder.setTitle("Need Permissions");
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
+            dialog.cancel();
+            openSettings();
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.show();
+    }
+
+
+    private void openSettings() {
+        Intent intent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+        }
+        startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
+            //Check if the permission is granted or not.
+            if (resultCode == RESULT_OK) {
+                popup();
+            } else { //Permission is not available
+                checkSetPer();
+                finish();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 
 }
