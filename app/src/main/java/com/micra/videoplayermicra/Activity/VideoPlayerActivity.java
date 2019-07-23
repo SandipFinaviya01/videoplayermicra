@@ -19,7 +19,9 @@ import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -68,6 +70,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private int view = 0;
     private int width;
     private long current;
+    private int volumes=-1;
+    private int mMaxVolume;
     private List<VideoItem> list;
 
     private PlaybackParameters parameters;
@@ -100,6 +104,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private TextView tvolume;
     private TextView pspeed;
     private TextView dspeed;
+    private float brightnesses = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +117,11 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         position = getIntent().getIntExtra("position", 0);
         list = (List<VideoItem>) getIntent().getSerializableExtra("list");
         current = getIntent().getLongExtra("current", 0);
-
+        int ori = getResources().getConfiguration().orientation;
+        if (ori == Configuration.ORIENTATION_PORTRAIT) {
+//            adView.setVisibility(View.GONE);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
         setPlayer();
         findViewId();
         setBottomSheet();
@@ -131,8 +140,30 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-        binding.playerView.setOnTouchListener(new OnSwipeTouchListener(this, player, binding.playerView, audioManager));
+//        binding.playerView.setOnTouchListener(new OnSwipeTouchListener(this, player, binding.playerView, audioManager));
+        final GestureDetector gestureDetector = new GestureDetector(VideoPlayerActivity.this, new PlayerGestureListener());
+        binding.playerView.setClickable(true);
+        binding.playerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (gestureDetector.onTouchEvent(event))
+                    return true;
 
+
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_UP:
+                        endGesture();
+                        break;
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private void endGesture() {
+        volumes = -1;
+        brightnesses = -1f;
     }
 
     private void setdata() {
@@ -266,6 +297,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         Display display = getWindowManager().getDefaultDisplay();
         realDisplayMetrics = new DisplayMetrics();
         display.getRealMetrics(realDisplayMetrics);
+        mMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
     }
 
     @Override
@@ -570,4 +603,115 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    private class PlayerGestureListener implements GestureDetector.OnGestureListener {
+
+        private boolean firstTouch;
+        private boolean volumeControl;
+        private boolean toSeek;
+        
+        
+        @Override
+        public boolean onDown(MotionEvent e) {
+            firstTouch = true;
+            return true;
+        }
+
+        @Override
+        public void onShowPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            float mOldX = e1.getX(), mOldY = e1.getY();
+            float deltaY = mOldY - e2.getY();
+            float deltaX = mOldX - e2.getX();
+            if (firstTouch) {
+                toSeek = Math.abs(distanceX) >= Math.abs(distanceY);
+                volumeControl=mOldX > width * 0.5f;
+                firstTouch = false;
+            }
+
+            if (toSeek) {
+               /* if (!isLive) {
+                    onProgressSlide(-deltaX / videoView.getWidth());
+                }*/
+            } else {
+                float percent = deltaY / binding.playerView.getHeight();
+                if (volumeControl) {
+                    onVolumeSlide(percent);
+                } else {
+                    onBrightnessSlide(percent);
+                }
+
+
+            }
+
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            return false;
+        }
+    }
+
+    private void onBrightnessSlide(float percent) {
+        if (brightnesses < 0) {
+            brightnesses = getWindow().getAttributes().screenBrightness;
+            if (brightnesses <= 0.00f){
+                brightnesses = 0.50f;
+            }else if (brightnesses < 0.01f){
+                brightnesses = 0.01f;
+            }
+        }
+        binding.appVideoBrightnessBox.setVisibility(View.VISIBLE);
+        WindowManager.LayoutParams lpa = getWindow().getAttributes();
+        lpa.screenBrightness = brightnesses + percent;
+        if (lpa.screenBrightness > 1.0f){
+            lpa.screenBrightness = 1.0f;
+        }else if (lpa.screenBrightness < 0.01f){
+            lpa.screenBrightness = 0.01f;
+        }
+        binding.appVideoBrightness.setText(((int) (lpa.screenBrightness * 100))+"%");
+        getWindow().setAttributes(lpa);
+    }
+
+    private void onVolumeSlide(float percent) {
+        if (volumes == -1) {
+            volumes = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (volumes < 0)
+                volumes = 0;
+        }
+
+        int index = (int) (percent * mMaxVolume) + volumes;
+        if (index > mMaxVolume)
+            index = mMaxVolume;
+        else if (index < 0)
+            index = 0;
+
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
+
+        int i = (int) (index * 1.0 / mMaxVolume * 100);
+        String s = i + "%";
+        if (i == 0) {
+            s = "off";
+        }
+
+        binding.appVideoVolumeIcon.setImageResource(i==0?R.drawable.ic_volume_off_white_36dp:R.drawable.ic_volume_up_white_36dp);
+        binding.appVideoBrightnessBox.setVisibility(View.GONE);
+        binding.appVideoVolumeBox.setVisibility(View.VISIBLE);
+        binding.appVideoVolume.setVisibility(View.VISIBLE);
+        binding.appVideoVolume.setText(s);
+    }
 }
