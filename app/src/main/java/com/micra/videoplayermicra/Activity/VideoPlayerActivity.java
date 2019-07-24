@@ -70,7 +70,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private int view = 0;
     private int width;
     private long current;
-    private int volumes=-1;
+    private int volumes = -1;
     private int mMaxVolume;
     private List<VideoItem> list;
 
@@ -111,7 +111,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_video_player);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_video_player);
         init();
 
         position = getIntent().getIntExtra("position", 0);
@@ -164,6 +164,9 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private void endGesture() {
         volumes = -1;
         brightnesses = -1f;
+        binding.appVideoBrightnessBox.setVisibility(View.GONE);
+        binding.appVideoVolumeBox.setVisibility(View.GONE);
+        binding.appVideoFastForwardBox.setVisibility(View.GONE);
     }
 
     private void setdata() {
@@ -303,9 +306,9 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v == back){
+        if (v == back) {
             onBackPressed();
-        }else if (v == share){
+        } else if (v == share) {
             player.setPlayWhenReady(false);
             Intent my = new Intent(Intent.ACTION_SEND);
             my.setType("video/*");
@@ -313,11 +316,11 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
             my.putExtra(Intent.EXTRA_TEXT, list.get(position).getDISPLAY_NAME());
             my.putExtra(Intent.EXTRA_SUBJECT, list.get(position).getDISPLAY_NAME());
             startActivity(Intent.createChooser(my, "Share Video"));
-        }else if (v == lock){
+        } else if (v == lock) {
             lock();
-        }else if (v == unlock){
+        } else if (v == unlock) {
             unlock();
-        }else if (v == crop){
+        } else if (v == crop) {
             switch (view) {
                 case 0:
                     binding.playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
@@ -335,19 +338,19 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                     view = 0;
                     break;
             }
-        }else if (v == brightness){
+        } else if (v == brightness) {
             handleBrightness();
-        }else if (v == volume){
+        } else if (v == volume) {
             handleVolume();
-        }else if (v == pspeed){
+        } else if (v == pspeed) {
             handlePsSpeed();
-        }else if (v == repeat){
+        } else if (v == repeat) {
             handleRepeate();
-        }else if (v == rotate){
+        } else if (v == rotate) {
             handleRotate();
-        }else if (v == popup){
+        } else if (v == popup) {
             handlePopUp();
-        }else if (v == playlist){
+        } else if (v == playlist) {
             bottomSheetDialog.show();
         }
     }
@@ -608,11 +611,16 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         private boolean firstTouch;
         private boolean volumeControl;
         private boolean toSeek;
-        
-        
+
+
         @Override
         public boolean onDown(MotionEvent e) {
             firstTouch = true;
+            if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                if (binding.playerView.isControllerVisible()) {
+                    binding.playerView.hideController();
+                } else binding.playerView.showController();
+            }
             return true;
         }
 
@@ -633,7 +641,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
             float deltaX = mOldX - e2.getX();
             if (firstTouch) {
                 toSeek = Math.abs(distanceX) >= Math.abs(distanceY);
-                volumeControl=mOldX > width * 0.5f;
+                volumeControl = mOldX > width * 0.5f;
                 firstTouch = false;
             }
 
@@ -641,6 +649,9 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                /* if (!isLive) {
                     onProgressSlide(-deltaX / videoView.getWidth());
                 }*/
+                if (!lockstatus) {
+                    onProgressSlide(-deltaX / binding.playerView.getWidth());
+                }
             } else {
                 float percent = deltaY / binding.playerView.getHeight();
                 if (volumeControl) {
@@ -648,8 +659,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                 } else {
                     onBrightnessSlide(percent);
                 }
-
-
             }
 
             return true;
@@ -666,25 +675,63 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void onProgressSlide(float percent) {
+        long position = player.getCurrentPosition();
+        long duration = player.getDuration();
+        long deltaMax = Math.min(100 * 1000, duration - position);
+        long delta = (long) (deltaMax * percent);
+
+
+        long newPosition = delta + position;
+        if (newPosition > duration) {
+            newPosition = duration;
+        } else if (newPosition <= 0) {
+            newPosition = 0;
+            delta = -position;
+        }
+        int showDelta = (int) delta / 1000;
+        if (showDelta != 0) {
+            binding.appVideoFastForwardBox.setVisibility(View.VISIBLE);
+            String text = showDelta > 0 ? ("+" + showDelta) : "" + showDelta;
+//            $.id(R.id.app_video_fastForward).text(text + "s");
+            binding.appVideoFastForward.setText(text + "s");
+//            $.id(R.id.app_video_fastForward_target).text(generateTime(newPosition)+"/");
+            binding.appVideoFastForwardTarget.setText(generateTime(newPosition) + "/");
+//            $.id(R.id.app_video_fastForward_all).text(generateTime(duration));
+            binding.appVideoFastForwardAll.setText(generateTime(duration));
+            player.seekTo(newPosition);
+
+        }
+    }
+
+    private String generateTime(long time) {
+        int totalSeconds = (int) (time / 1000);
+        int seconds = totalSeconds % 60;
+        int minutes = (totalSeconds / 60) % 60;
+        int hours = totalSeconds / 3600;
+        return hours > 0 ? String.format("%02d:%02d:%02d", hours, minutes, seconds) : String.format("%02d:%02d", minutes, seconds);
+    }
+
     private void onBrightnessSlide(float percent) {
         if (brightnesses < 0) {
             brightnesses = getWindow().getAttributes().screenBrightness;
-            if (brightnesses <= 0.00f){
+            if (brightnesses <= 0.00f) {
                 brightnesses = 0.50f;
-            }else if (brightnesses < 0.01f){
+            } else if (brightnesses < 0.01f) {
                 brightnesses = 0.01f;
             }
         }
         binding.appVideoBrightnessBox.setVisibility(View.VISIBLE);
         WindowManager.LayoutParams lpa = getWindow().getAttributes();
         lpa.screenBrightness = brightnesses + percent;
-        if (lpa.screenBrightness > 1.0f){
+        if (lpa.screenBrightness > 1.0f) {
             lpa.screenBrightness = 1.0f;
-        }else if (lpa.screenBrightness < 0.01f){
+        } else if (lpa.screenBrightness < 0.01f) {
             lpa.screenBrightness = 0.01f;
         }
-        binding.appVideoBrightness.setText(((int) (lpa.screenBrightness * 100))+"%");
+        binding.appVideoBrightness.setText(((int) (lpa.screenBrightness * 100)) + "%");
         getWindow().setAttributes(lpa);
+        PreferenceUtil.getInstance(getApplicationContext()).saveLastBrightness(lpa.screenBrightness);
     }
 
     private void onVolumeSlide(float percent) {
@@ -708,7 +755,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
             s = "off";
         }
 
-        binding.appVideoVolumeIcon.setImageResource(i==0?R.drawable.ic_volume_off_white_36dp:R.drawable.ic_volume_up_white_36dp);
+        binding.appVideoVolumeIcon.setImageResource(i == 0 ? R.drawable.ic_volume_off_white_36dp : R.drawable.ic_volume_up_white_36dp);
         binding.appVideoBrightnessBox.setVisibility(View.GONE);
         binding.appVideoVolumeBox.setVisibility(View.VISIBLE);
         binding.appVideoVolume.setVisibility(View.VISIBLE);
