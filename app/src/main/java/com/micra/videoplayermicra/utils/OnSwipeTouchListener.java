@@ -219,7 +219,6 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     @SuppressLint("DefaultLocale")
     private String duration(Long x) {
 
-
         long ho = TimeUnit.MILLISECONDS.toHours(x);
         long mo = TimeUnit.MILLISECONDS.toMinutes(x) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(x));
         long so = TimeUnit.MILLISECONDS.toSeconds(x) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(x));
