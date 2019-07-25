@@ -7,7 +7,7 @@
 
         <variable
             name="folder"
-            type="com.micra.videoplayermicra.model.Folder" />
+            type="com.josieAlan.videoplayermicra.model.Folder" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
