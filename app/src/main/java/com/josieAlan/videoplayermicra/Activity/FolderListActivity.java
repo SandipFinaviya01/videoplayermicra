@@ -69,6 +69,10 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         prefData = PrefData.getInstance();
         if (prefData.isNetwork()){
             showBanner();
+            loadNativeAds();
+            if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
+                prefData.homeAd.show();
+            }
         }
         setSupportActionBar(binding.toolbar2);
         setUpRecyclerView();

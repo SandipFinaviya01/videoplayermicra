@@ -76,6 +76,9 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
         if (prefData.isNetwork()){
             loadNativeAds();
             showBanner();
+            if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
+                prefData.homeAd.show();
+            }
         }
         String name = getIntent().getStringExtra("name");
         binding.toolbarVideoList.setTitle(name);

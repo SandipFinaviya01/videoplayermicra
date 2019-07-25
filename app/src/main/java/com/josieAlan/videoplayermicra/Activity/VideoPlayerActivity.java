@@ -42,7 +42,9 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.exoplayer2.video.VideoListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.josieAlan.videoplayermicra.PrefData;
 import com.josieAlan.videoplayermicra.R;
 import com.josieAlan.videoplayermicra.adapter.playlist_adapter;
 import com.josieAlan.videoplayermicra.databinding.ActivityVideoPlayerBinding;
@@ -104,6 +106,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private TextView pspeed;
     private TextView dspeed;
     private float brightnesses = -1;
+    private PrefData prefData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_video_player);
+        prefData = PrefData.getInstance();
         init();
 
         position = getIntent().getIntExtra("position", 0);
@@ -137,6 +141,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                     bottomSheetDialog.dismiss();
                 }
             }
+
         });
 
 //        binding.playerView.setOnTouchListener(new OnSwipeTouchListener(this, player, binding.playerView, audioManager));
@@ -308,6 +313,11 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         if (v == back) {
             onBackPressed();
         } else if (v == share) {
+            if (prefData.isNetwork()) {
+                if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
+                    prefData.homeAd.show();
+                }
+            }
             player.setPlayWhenReady(false);
             Intent my = new Intent(Intent.ACTION_SEND);
             my.setType("video/*");
