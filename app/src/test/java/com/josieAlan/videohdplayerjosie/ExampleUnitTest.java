@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra;
+package com.josieAlan.videohdplayerjosie;
 
 import org.junit.Test;
 

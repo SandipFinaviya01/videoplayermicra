@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.Activity;
+package com.josieAlan.videohdplayerjosie.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,11 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.josieAlan.videoplayermicra.PrefData;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.databinding.ActivityMainBinding;
-import com.josieAlan.videoplayermicra.model.ImageUploadInfo;
-import com.josieAlan.videoplayermicra.model.UploadUploadInfo;
+import com.josieAlan.videohdplayerjosie.PrefData;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.databinding.ActivityMainBinding;
+import com.josieAlan.videohdplayerjosie.model.ImageUploadInfo;
+import com.josieAlan.videohdplayerjosie.model.UploadUploadInfo;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -34,14 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, FolderListActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        },2000);
 
         prefData = PrefData.getInstance();
         if (prefData.isNetwork()) {

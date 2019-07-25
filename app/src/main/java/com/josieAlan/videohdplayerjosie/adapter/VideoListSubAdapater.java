@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.adapter;
+package com.josieAlan.videohdplayerjosie.adapter;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -19,10 +19,10 @@ import androidx.appcompat.view.ActionMode;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.databinding.VideoListItem2Binding;
-import com.josieAlan.videoplayermicra.model.VideoItem;
-import com.josieAlan.videoplayermicra.viewholder.VideoListSubHolder;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.databinding.VideoListItem2Binding;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.viewholder.VideoListSubHolder;
 
 import java.io.File;
 import java.util.ArrayList;

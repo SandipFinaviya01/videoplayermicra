@@ -1,11 +1,11 @@
-package com.josieAlan.videoplayermicra.viewholder;
+package com.josieAlan.videohdplayerjosie.viewholder;
 
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josieAlan.videoplayermicra.model.Folder;
-import com.josieAlan.videoplayermicra.databinding.VideoListItemBinding;
+import com.josieAlan.videohdplayerjosie.model.Folder;
+import com.josieAlan.videohdplayerjosie.databinding.VideoListItemBinding;
 
 public class VideoListHolder extends RecyclerView.ViewHolder {
     public interface OnVideoListListner{

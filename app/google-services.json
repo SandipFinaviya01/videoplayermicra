@@ -119,6 +119,43 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:565696839867:android:a5abd423bea7037c",
+        "android_client_info": {
+          "package_name": "com.joiseAlan.videohdplayerjosie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565696839867-06mpnn5982pqa0cs3r2mejgshrjboibk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.joiseAlan.videohdplayerjosie",
+            "certificate_hash": "2d1e954c18ba1acd395b6cd6a9782cea7f71dd5c"
+          }
+        },
+        {
+          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:565696839867:android:832ec03cb62e0d76",
         "android_client_info": {
           "package_name": "com.joiseAlan.videoplayermicra"

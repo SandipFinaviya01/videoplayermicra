@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.utils;
+package com.josieAlan.videohdplayerjosie.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

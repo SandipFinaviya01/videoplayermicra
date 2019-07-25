@@ -8,7 +8,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "com.joiseAlan.videoplayermicra"
+        applicationId "com.joiseAlan.videohdplayerjosie"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -38,8 +38,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha08'
     implementation 'com.facebook.android:audience-network-sdk:5.4.1'
     implementation 'com.google.firebase:firebase-database:18.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.swipper.library:library:0.1.1'
+    implementation 'com.wang.avi:library:2.1.3'
 }

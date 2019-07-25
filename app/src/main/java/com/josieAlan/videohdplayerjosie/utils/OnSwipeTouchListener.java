@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.utils;
+package com.josieAlan.videohdplayerjosie.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.josieAlan.videoplayermicra.R;
+import com.josieAlan.videohdplayerjosie.R;
 
 import java.util.concurrent.TimeUnit;
 

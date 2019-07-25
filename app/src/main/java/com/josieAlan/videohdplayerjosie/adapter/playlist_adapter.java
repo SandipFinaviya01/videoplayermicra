@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.adapter;
+package com.josieAlan.videohdplayerjosie.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
 
 import java.util.List;
 

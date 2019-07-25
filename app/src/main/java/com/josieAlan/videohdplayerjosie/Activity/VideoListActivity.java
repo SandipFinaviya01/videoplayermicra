@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.Activity;
+package com.josieAlan.videohdplayerjosie.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,13 +36,13 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeBannerAd;
-import com.josieAlan.videoplayermicra.PrefData;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.adapter.VideoListSubAdapater;
-import com.josieAlan.videoplayermicra.databinding.ActivityVideoList2Binding;
-import com.josieAlan.videoplayermicra.model.VideoItem;
-import com.josieAlan.videoplayermicra.utils.MediaQuery;
-import com.josieAlan.videoplayermicra.viewholder.VideoListSubHolder;
+import com.josieAlan.videohdplayerjosie.PrefData;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.adapter.VideoListSubAdapater;
+import com.josieAlan.videohdplayerjosie.databinding.ActivityVideoList2Binding;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.utils.MediaQuery;
+import com.josieAlan.videohdplayerjosie.viewholder.VideoListSubHolder;
 
 import java.io.File;
 import java.io.Serializable;

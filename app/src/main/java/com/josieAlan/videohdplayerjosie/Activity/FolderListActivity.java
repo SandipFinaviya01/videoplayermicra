@@ -1,7 +1,8 @@
-package com.josieAlan.videoplayermicra.Activity;
+package com.josieAlan.videohdplayerjosie.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -15,14 +16,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,13 +43,13 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeBannerAd;
-import com.josieAlan.videoplayermicra.PrefData;
-import com.josieAlan.videoplayermicra.adapter.VideoListAdapter;
-import com.josieAlan.videoplayermicra.model.Folder;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.databinding.ActivityVideoListBinding;
-import com.josieAlan.videoplayermicra.utils.MediaQuery;
-import com.josieAlan.videoplayermicra.viewholder.VideoListHolder;
+import com.josieAlan.videohdplayerjosie.PrefData;
+import com.josieAlan.videohdplayerjosie.adapter.VideoListAdapter;
+import com.josieAlan.videohdplayerjosie.model.Folder;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.databinding.ActivityVideoListBinding;
+import com.josieAlan.videohdplayerjosie.utils.MediaQuery;
+import com.josieAlan.videohdplayerjosie.viewholder.VideoListHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -266,4 +272,33 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         intent.putExtra("name", folder.getBucket());
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        showConfiramationDialog();
+    }
+
+    private void showConfiramationDialog() {
+        final AppCompatDialog dialog = new AppCompatDialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.exit_dialog);
+        dialog.setCancelable(true);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+
+        dialog.findViewById(R.id.tvYes).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        dialog.findViewById(R.id.tvNo).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.model;
+package com.josieAlan.videohdplayerjosie.model;
 
 import java.io.Serializable;
 

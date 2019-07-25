@@ -1,11 +1,11 @@
-package com.josieAlan.videoplayermicra.utils;
+package com.josieAlan.videohdplayerjosie.utils;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import com.josieAlan.videoplayermicra.model.Folder;
-import com.josieAlan.videoplayermicra.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.model.Folder;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.services;
+package com.josieAlan.videohdplayerjosie.services;
 
 import android.annotation.SuppressLint;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -11,9 +11,9 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.josieAlan.videoplayermicra.Activity.VideoPlayerActivity;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.Activity.VideoPlayerActivity;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
 
 import android.app.Service;
 import android.content.Intent;

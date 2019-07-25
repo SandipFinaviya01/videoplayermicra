@@ -1,9 +1,9 @@
-package com.josieAlan.videoplayermicra.utils;
+package com.josieAlan.videohdplayerjosie.utils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.josieAlan.videoplayermicra.model.Folder;
+import com.josieAlan.videohdplayerjosie.model.Folder;
 
 import java.util.List;
 

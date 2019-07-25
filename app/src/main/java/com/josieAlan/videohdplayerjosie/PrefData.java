@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra;
+package com.josieAlan.videohdplayerjosie;
 
 import android.app.Application;
 import android.content.Context;
@@ -18,7 +18,7 @@ import com.facebook.ads.MediaView;
 import com.facebook.ads.MediaViewListener;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
-import com.josieAlan.videoplayermicra.model.ImageUploadInfo;
+import com.josieAlan.videohdplayerjosie.model.ImageUploadInfo;
 
 import java.util.ArrayList;
 import java.util.List;

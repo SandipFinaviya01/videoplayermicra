@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.Activity;
+package com.josieAlan.videohdplayerjosie.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,15 +42,14 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.exoplayer2.video.VideoListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.josieAlan.videoplayermicra.PrefData;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.adapter.playlist_adapter;
-import com.josieAlan.videoplayermicra.databinding.ActivityVideoPlayerBinding;
-import com.josieAlan.videoplayermicra.model.VideoItem;
-import com.josieAlan.videoplayermicra.services.floating;
-import com.josieAlan.videoplayermicra.utils.PreferenceUtil;
+import com.josieAlan.videohdplayerjosie.PrefData;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.adapter.playlist_adapter;
+import com.josieAlan.videohdplayerjosie.databinding.ActivityVideoPlayerBinding;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.services.floating;
+import com.josieAlan.videohdplayerjosie.utils.PreferenceUtil;
 
 import java.io.Serializable;
 import java.util.List;

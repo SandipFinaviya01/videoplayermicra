@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.josieAlan.videoplayermicra.utils.BindUtils" />
+        <import type="com.josieAlan.videohdplayerjosie.utils.BindUtils" />
         <variable
             name="videoItem"
-            type="com.josieAlan.videoplayermicra.model.VideoItem" />
+            type="com.josieAlan.videohdplayerjosie.model.VideoItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

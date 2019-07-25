@@ -1,4 +1,4 @@
-package com.josieAlan.videoplayermicra.adapter;
+package com.josieAlan.videohdplayerjosie.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,11 +8,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josieAlan.videoplayermicra.model.Folder;
-import com.josieAlan.videoplayermicra.R;
-import com.josieAlan.videoplayermicra.databinding.VideoListItemBinding;
-import com.josieAlan.videoplayermicra.utils.EmployeeDiffCallback;
-import com.josieAlan.videoplayermicra.viewholder.VideoListHolder;
+import com.josieAlan.videohdplayerjosie.model.Folder;
+import com.josieAlan.videohdplayerjosie.R;
+import com.josieAlan.videohdplayerjosie.databinding.VideoListItemBinding;
+import com.josieAlan.videohdplayerjosie.utils.EmployeeDiffCallback;
+import com.josieAlan.videohdplayerjosie.viewholder.VideoListHolder;
 
 import java.util.ArrayList;
 import java.util.List;

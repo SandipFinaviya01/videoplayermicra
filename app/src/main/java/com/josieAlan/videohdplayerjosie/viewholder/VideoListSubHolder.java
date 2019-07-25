@@ -1,13 +1,13 @@
-package com.josieAlan.videoplayermicra.viewholder;
+package com.josieAlan.videohdplayerjosie.viewholder;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.josieAlan.videoplayermicra.adapter.VideoListSubAdapater;
-import com.josieAlan.videoplayermicra.databinding.VideoListItem2Binding;
-import com.josieAlan.videoplayermicra.model.VideoItem;
+import com.josieAlan.videohdplayerjosie.adapter.VideoListSubAdapater;
+import com.josieAlan.videohdplayerjosie.databinding.VideoListItem2Binding;
+import com.josieAlan.videohdplayerjosie.model.VideoItem;
 
 import java.util.List;
 
