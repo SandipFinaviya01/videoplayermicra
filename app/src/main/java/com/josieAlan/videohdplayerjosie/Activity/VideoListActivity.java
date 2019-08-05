@@ -32,6 +32,8 @@ import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdIconView;
 import com.facebook.ads.AdOptionsView;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
@@ -66,6 +68,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
     private LinearLayout adChoicesContainer;
     private AdChoicesView adChoicesView;
+    private AdView adViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,13 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
 
     private void showBanner() {
+        adViews = new AdView(this, prefData.referClass.fbBannerKey, AdSize.BANNER_HEIGHT_50);
+
+        binding.bannerContainer.addView(adViews);
+        // Request an ad
+        adViews.loadAd();
+
+      /*
         this.nativeBannerAd = new NativeBannerAd(this, prefData.referClass.fbBannerKey);
         this.nativeBannerAd.setAdListener(new NativeAdListener() {
             public void onAdClicked(Ad ad) {
@@ -125,7 +135,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
                 }
             }
         });
-        this.nativeBannerAd.loadAd();
+        this.nativeBannerAd.loadAd();*/
     }
 
     private void loadNativeAds() {

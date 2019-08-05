@@ -134,15 +134,20 @@ public class MediaQuery {
     }
 
     private String duration(String x) {
-        int y = Integer.parseInt(x);
+        try {
+            int y = Integer.parseInt(x);
 
-        long ho = TimeUnit.MILLISECONDS.toHours(y);
-        long mo = TimeUnit.MILLISECONDS.toMinutes(y) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(y));
-        long so = TimeUnit.MILLISECONDS.toSeconds(y) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(y));
+            long ho = TimeUnit.MILLISECONDS.toHours(y);
+            long mo = TimeUnit.MILLISECONDS.toMinutes(y) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(y));
+            long so = TimeUnit.MILLISECONDS.toSeconds(y) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(y));
 
-        if (ho >= 1) return String.format("%02d:%02d:%02d", ho, mo, so);
-        else return String.format("%02d:%02d", mo, so);
+            if (ho >= 1) return String.format("%02d:%02d:%02d", ho, mo, so);
+            else return String.format("%02d:%02d", mo, so);
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+       return "";
     }
 
     private String date(String x) {

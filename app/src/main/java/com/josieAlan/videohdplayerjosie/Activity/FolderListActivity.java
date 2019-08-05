@@ -39,6 +39,9 @@ import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdIconView;
 import com.facebook.ads.AdOptionsView;
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
@@ -68,11 +71,14 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
 
     private LinearLayout adChoicesContainer;
     private AdChoicesView adChoicesView;
+    private AdView adViews;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_video_list);
         prefData = PrefData.getInstance();
+        AdSettings.addTestDevice("764f2cd5-1630-4a33-b384-10d94099b870");
         if (prefData.isNetwork()){
             showBanner();
             loadNativeAds();
@@ -155,7 +161,12 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
     }
 
     private void showBanner() {
-        this.nativeBannerAd = new NativeBannerAd(this, prefData.referClass.fbBannerKey);
+        adViews = new AdView(this, prefData.referClass.fbBannerKey, AdSize.BANNER_HEIGHT_50);
+
+        binding.bannerContainer.addView(adViews);
+        // Request an ad
+        adViews.loadAd();
+        /*this.nativeBannerAd = new NativeBannerAd(this, prefData.referClass.fbBannerKey);
         this.nativeBannerAd.setAdListener(new NativeAdListener() {
             public void onAdClicked(Ad ad) {
             }
@@ -176,7 +187,7 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
                 }
             }
         });
-        this.nativeBannerAd.loadAd();
+        this.nativeBannerAd.loadAd();*/
     }
 
     private void inflateAd(NativeBannerAd nativeBannerAd) {
