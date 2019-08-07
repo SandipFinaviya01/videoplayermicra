@@ -13,7 +13,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/splash_screen" />
+            android:src="@drawable/splash" />
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
