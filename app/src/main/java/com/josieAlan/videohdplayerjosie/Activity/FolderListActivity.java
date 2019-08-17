@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -72,18 +74,35 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
     private LinearLayout adChoicesContainer;
     private AdChoicesView adChoicesView;
     private AdView adViews;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_video_list);
         prefData = PrefData.getInstance();
         AdSettings.addTestDevice("764f2cd5-1630-4a33-b384-10d94099b870");
+        progressDialog = new ProgressDialog(FolderListActivity.this,R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage("Wait while loading Ads..."); // Setting Message
+        progressDialog.setTitle("Loading"); // Setting Title
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.setCancelable(false);
         if (prefData.isNetwork()){
             showBanner();
             loadNativeAds();
             if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
-                prefData.homeAd.show();
+
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                progressDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        prefData.homeAd.show();
+
+                    }
+                }, 1000);
             }
         }
         setSupportActionBar(binding.toolbar2);

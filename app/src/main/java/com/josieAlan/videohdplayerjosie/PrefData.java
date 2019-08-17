@@ -98,7 +98,7 @@ public class PrefData extends Application {
         });
     }
     public void showDetailAd(){
-        if (detailAd != null){
+       /* if (detailAd != null){
             detailAd.destroy();
             detailAd = null;
         }
@@ -134,10 +134,10 @@ public class PrefData extends Application {
             public void onLoggingImpression(Ad ad) {
 
             }
-        });
+        });*/
     }
     public void showMoreAd(){
-        if (moreAd != null){
+    /*    if (moreAd != null){
             moreAd.destroy();
             moreAd = null;
         }
@@ -173,10 +173,10 @@ public class PrefData extends Application {
             public void onLoggingImpression(Ad ad) {
 
             }
-        });
+        });*/
     }
     public void showSubAd(){
-        if (subAd != null){
+       /* if (subAd != null){
             subAd.destroy();
             subAd = null;
         }
@@ -212,15 +212,15 @@ public class PrefData extends Application {
             public void onLoggingImpression(Ad ad) {
 
             }
-        });
+        });*/
     }
     public  void viewNative(NativeAd nativeAd2, View view, Context context) {
         try {
-            AdIconView adIconView = (AdIconView) view.findViewById(R.id.nativeAdIcon);
-            TextView textView = (TextView) view.findViewById(R.id.nativeAdTitle);
-            TextView textView2 = (TextView) view.findViewById(R.id.nativeAdBody);
-            MediaView mediaView = (MediaView) view.findViewById(R.id.nativeAdMedia);
-            TextView textView3 = (TextView) view.findViewById(R.id.nativeAdSponsoredLabel);
+            AdIconView adIconView = view.findViewById(R.id.nativeAdIcon);
+            TextView textView = view.findViewById(R.id.nativeAdTitle);
+            TextView textView2 = view.findViewById(R.id.nativeAdBody);
+            MediaView mediaView = view.findViewById(R.id.nativeAdMedia);
+            TextView textView3 = view.findViewById(R.id.nativeAdSponsoredLabel);
             mediaView.setListener(new MediaViewListener() {
                 public void onComplete(MediaView mediaView) {
                 }
@@ -246,8 +246,8 @@ public class PrefData extends Application {
                 public void onVolumeChange(MediaView mediaView, float f) {
                 }
             });
-            TextView textView4 = (TextView) view.findViewById(R.id.nativeAdSocialContext);
-            Button button = (Button) view.findViewById(R.id.nativeAdCallToAction);
+            TextView textView4 = view.findViewById(R.id.nativeAdSocialContext);
+            Button button = view.findViewById(R.id.nativeAdCallToAction);
             textView4.setText(nativeAd2.getAdSocialContext());
             button.setText(nativeAd2.getAdCallToAction());
             button.setVisibility(nativeAd2.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
@@ -258,7 +258,7 @@ public class PrefData extends Application {
             arrayList.add(adIconView);
             arrayList.add(mediaView);
             arrayList.add(button);
-            nativeAd2.registerViewForInteraction(view, mediaView, (MediaView) adIconView, (List<View>) arrayList);
+            nativeAd2.registerViewForInteraction(view, mediaView, adIconView, (List<View>) arrayList);
             NativeAdBase.NativeComponentTag.tagView(adIconView, NativeAdBase.NativeComponentTag.AD_ICON);
             NativeAdBase.NativeComponentTag.tagView(textView, NativeAdBase.NativeComponentTag.AD_TITLE);
             NativeAdBase.NativeComponentTag.tagView(textView2, NativeAdBase.NativeComponentTag.AD_BODY);

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
@@ -106,6 +108,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private TextView dspeed;
     private float brightnesses = -1;
     private PrefData prefData;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +117,11 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_video_player);
         prefData = PrefData.getInstance();
+        progressDialog = new ProgressDialog(VideoPlayerActivity.this,R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage("Wait while loading Ads..."); // Setting Message
+        progressDialog.setTitle("Loading"); // Setting Title
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.setCancelable(false);
         init();
 
         position = getIntent().getIntExtra("position", 0);
@@ -314,7 +322,18 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         } else if (v == share) {
             if (prefData.isNetwork()) {
                 if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
-                    prefData.homeAd.show();
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                    progressDialog.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            prefData.homeAd.show();
+
+                        }
+                    }, 1000);
                 }
             }
             player.setPlayWhenReady(false);

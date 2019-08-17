@@ -9,11 +9,13 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,18 +71,34 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
     private LinearLayout adChoicesContainer;
     private AdChoicesView adChoicesView;
     private AdView adViews;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_video_list2);
         setSupportActionBar(binding.toolbarVideoList);
         prefData = PrefData.getInstance();
+        progressDialog = new ProgressDialog(VideoListActivity.this,R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage("Wait while loading Ads..."); // Setting Message
+        progressDialog.setTitle("Loading"); // Setting Title
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.setCancelable(false);
         if (prefData.isNetwork()){
             loadNativeAds();
             showBanner();
             if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
-                prefData.homeAd.show();
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                progressDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        prefData.homeAd.show();
+
+                    }
+                }, 1000);
             }
         }
         String name = getIntent().getStringExtra("name");
