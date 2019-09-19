@@ -185,7 +185,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
                 if (dataSnapshot.exists()){
                     menu.clear()
                     try {
-                        dataSnapshot.children.mapNotNullTo(menu) { it.getValue<RequestModel>(RequestModel::class.java) }
+                        dataSnapshot.children.mapNotNullTo(menu) { return@mapNotNullTo it.getValue(RequestModel::class.java) }
                         handleRequestData();
                     }catch (e : Exception){
                         e.printStackTrace()
@@ -373,11 +373,11 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
     private fun sendMoneyRequest(text: CharSequence) {
         val rupees = users.rupee;
         val msg = " Your request for withdraw " + users.coins + " Rupee on " + text + " is pending it may take upto 3-5 business day"
-        val user = Users("", users.coins,0.0,msg,users.reqnumber+1,users.userNumber)
+        val user = Users(users.username, users.coins,0.0,msg,users.reqnumber+1,users.userNumber)
         mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
 
         val requestRef = mDatabase!!.child("Request").child(prefData!!.reqUserId)
-        val  requestChile = requestRef.child(users.reqnumber.toString());
+        val  requestChile = requestRef.child(users.reqnumber.toString() + "_Request");
         val requestModel = RequestModel(text.toString(),rupees,"pending",users.reqnumber)
         requestChile.setValue(requestModel)
     }
@@ -396,7 +396,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             customView(R.layout.conversion_dialog, scrollable = true, horizontalPadding = true)
             positiveButton(android.R.string.ok) { dialog ->
                 // Pull the password out of the custom view when the positive button is pressed
-                val user = Users("", 0.0,users.rupee + (users.coins / commonModel!!.conversion),users.msg,users.reqnumber,users.userNumber)
+                val user = Users(users.username, 0.0,users.rupee + (users.coins / commonModel!!.conversion),users.msg,users.reqnumber,users.userNumber)
                 mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
             }
             negativeButton(android.R.string.cancel)
@@ -418,7 +418,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
 
     override fun onRewarded(reward: RewardItem) {
         // Reward the user.
-        val user = Users("", users.coins + commonModel!!.reward,users.rupee,users.msg,users.reqnumber+1,users.userNumber)
+        val user = Users(users.username, users.coins + commonModel!!.reward,users.rupee,users.msg,users.reqnumber+1,users.userNumber)
         mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
     }
 

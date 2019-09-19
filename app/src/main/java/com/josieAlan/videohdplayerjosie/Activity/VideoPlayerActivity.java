@@ -804,10 +804,12 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                 }
             } else {
                 float percent = deltaY / binding.playerView.getHeight();
-                if (volumeControl) {
-                    onVolumeSlide(percent);
-                } else {
-                    onBrightnessSlide(percent);
+                if (!lockstatus) {
+                    if (volumeControl) {
+                        onVolumeSlide(percent);
+                    } else {
+                        onBrightnessSlide(percent);
+                    }
                 }
             }
 
