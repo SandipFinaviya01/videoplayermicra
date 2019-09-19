@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Super HD Mex Player</string>
     <string name="name">hdmax</string>
+    <string name="app_id">2094283264213014</string>
+    <string name="conversiontitile">Error</string>
+    <string name="mobileTitle">Enter Mobile No</string>
+    <string name="mobileMsg">Enter Your paytm register mobile number we will send money within 3–5 business day</string>
+    <string name="refund">if you enter wrong number which are not register in paytm do not worry in that case we will give you refund</string>
+    <string name="adId">ca-app-pub-7014688784067346~1977282143</string>
 </resources>

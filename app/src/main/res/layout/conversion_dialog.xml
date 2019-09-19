@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvConversionRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000 coins = 1 Rupee"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tvYourCoins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your coins = 1000 "
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tvYourRupee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your rupee for coins = 1 rupee "
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+</LinearLayout>

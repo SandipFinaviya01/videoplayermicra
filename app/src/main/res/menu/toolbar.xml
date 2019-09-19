@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_info"
+        android:icon="@drawable/moreic"
+        android:title="More"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/ic_share"
+                android:title="Share"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/ic_rate"
+                android:title="Rate"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/ic_more"
+                android:title="More"
+                app:showAsAction="ifRoom" />
+        </menu>
+
+    </item>
+</menu>

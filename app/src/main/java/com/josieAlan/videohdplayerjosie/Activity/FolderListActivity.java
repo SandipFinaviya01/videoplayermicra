@@ -27,6 +27,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +50,20 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeBannerAd;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.josieAlan.videohdplayerjosie.PrefData;
 import com.josieAlan.videohdplayerjosie.adapter.VideoListAdapter;
+import com.josieAlan.videohdplayerjosie.model.CommonModel;
 import com.josieAlan.videohdplayerjosie.model.Folder;
 import com.josieAlan.videohdplayerjosie.R;
 import com.josieAlan.videohdplayerjosie.databinding.ActivityVideoListBinding;
+import com.josieAlan.videohdplayerjosie.model.Users;
 import com.josieAlan.videohdplayerjosie.utils.MediaQuery;
+import com.josieAlan.videohdplayerjosie.utils.MyNumFormatter;
 import com.josieAlan.videohdplayerjosie.viewholder.VideoListHolder;
 
 import java.util.ArrayList;
@@ -65,7 +75,6 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
     List<Folder> folderList = new ArrayList<>();
     VideoListAdapter adapter;
     private PrefData prefData;
-    public NativeBannerAd nativeBannerAd;
     private LinearLayout adViewBanner;
 
     NativeAd nativeAd;
@@ -74,12 +83,14 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
     private LinearLayout adChoicesContainer;
     private AdChoicesView adChoicesView;
     private AdView adViews;
+    private DatabaseReference mDatabase;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_video_list);
         prefData = PrefData.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         AdSettings.addTestDevice("764f2cd5-1630-4a33-b384-10d94099b870");
         progressDialog = new ProgressDialog(FolderListActivity.this,R.style.AppCompatAlertDialogStyle);
         progressDialog.setMessage("Wait while loading Ads..."); // Setting Message
@@ -124,6 +135,86 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         } else {
             updateData();
         }
+
+        binding.walletSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FolderListActivity.this,WalletActivity.class);
+                startActivity(intent);
+            }
+        });
+        if (!prefData.getUserId().equals("")) {
+            DatabaseReference userRef = mDatabase.child("users").child(prefData.getUserId());
+            ValueEventListener eventListner = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        Users users = dataSnapshot.getValue(Users.class);
+                        binding.tvAmount.setText(MyNumFormatter.getFormatted(users.coins));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            userRef.addValueEventListener(eventListner);
+        }
+
+        mDatabase.child("Common").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CommonModel commonModel = dataSnapshot.getValue(CommonModel.class);
+                if (commonModel == null){
+                    return;
+                }
+                if (commonModel.showwallet == 1){
+                    binding.walletSection.setVisibility(View.VISIBLE);
+                }else {
+                    binding.walletSection.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.ic_share:
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, "Super HD Max player");
+                    String sAux = "\nSuper HD Max player is one of the best app to play all type of video including 4K and other high formate Video from your device, it supports all format of video including MP4, AVI, AAC3. This is the best player you find on the store for enjoying your video, movie, songs, etc\n\n";
+                    sAux = sAux + "http://play.google.com/store/apps/details?id=" + getPackageName();
+                    i.putExtra(Intent.EXTRA_TEXT, sAux);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+                break;
+            case R.id.ic_rate:
+                startActivity(new Intent("android.intent.action.VIEW", Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                break;
+            case R.id.ic_more:
+                startActivity(new Intent("android.intent.action.VIEW", Uri.parse("https://play.google.com/store/apps/developer?id=josie+Alan+Apps")));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadNativeAds() {
@@ -180,62 +271,17 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
     }
 
     private void showBanner() {
-        adViews = new AdView(this, prefData.referClass.fbBannerKey, AdSize.BANNER_HEIGHT_50);
+        if (prefData.referClass != null) {
+            adViews = new AdView(this, prefData.referClass.fbBannerKey, AdSize.BANNER_HEIGHT_50);
 
-        binding.bannerContainer.addView(adViews);
-        // Request an ad
-        adViews.loadAd();
-        /*this.nativeBannerAd = new NativeBannerAd(this, prefData.referClass.fbBannerKey);
-        this.nativeBannerAd.setAdListener(new NativeAdListener() {
-            public void onAdClicked(Ad ad) {
-            }
-
-            public void onLoggingImpression(Ad ad) {
-            }
-
-            public void onMediaDownloaded(Ad ad) {
-            }
-
-            public void onError(Ad ad, AdError adError) {
-                Log.e("errorrshowbanner", adError.getErrorMessage());
-            }
-
-            public void onAdLoaded(Ad ad) {
-                if (nativeBannerAd != null && nativeBannerAd == ad) {
-                    inflateAd(nativeBannerAd);
-                }
-            }
-        });
-        this.nativeBannerAd.loadAd();*/
-    }
-
-    private void inflateAd(NativeBannerAd nativeBannerAd) {
-        nativeBannerAd.unregisterView();
-        int i = 0;
-        this.adViewBanner = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.native_banner_ad_layout, binding.nativeBannerAdContainer, false);
-        binding.nativeBannerAdContainer.addView(adViewBanner);
-        RelativeLayout relativeLayout = (RelativeLayout) this.adViewBanner.findViewById(R.id.adChoicesContainer);
-        AdOptionsView adOptionsView = new AdOptionsView(this, nativeBannerAd, this.binding.nativeBannerAdContainer);
-        relativeLayout.removeAllViews();
-        relativeLayout.addView(adOptionsView, 0);
-        TextView textView = (TextView) this.adViewBanner.findViewById(R.id.nativeAdTitle);
-        TextView textView2 = (TextView) this.adViewBanner.findViewById(R.id.nativeAdSocialContext);
-        TextView textView3 = (TextView) this.adViewBanner.findViewById(R.id.nativeAdSponsoredLabel);
-        AdIconView adIconView = (AdIconView) this.adViewBanner.findViewById(R.id.nativeIconView);
-        Button button = (Button) this.adViewBanner.findViewById(R.id.nativeAdCallToAction);
-        button.setText(nativeBannerAd.getAdCallToAction());
-        if (!nativeBannerAd.hasCallToAction()) {
-            i = 4;
+            binding.bannerContainer.addView(adViews);
+            // Request an ad
+            adViews.loadAd();
         }
-        button.setVisibility(i);
-        textView.setText(nativeBannerAd.getAdvertiserName());
-        textView2.setText(nativeBannerAd.getAdSocialContext());
-        textView3.setText(nativeBannerAd.getSponsoredTranslation());
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(textView);
-        arrayList.add(button);
-        nativeBannerAd.registerViewForInteraction(this.adViewBanner, adIconView, arrayList);
+
     }
+
+
 
     private void setUpRecyclerView() {
         binding.videoRecycler.setLayoutManager(new LinearLayoutManager(this));

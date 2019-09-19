@@ -1,5 +1,6 @@
 package com.josieAlan.videohdplayerjosie.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -45,16 +46,25 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.josieAlan.videohdplayerjosie.PrefData;
 import com.josieAlan.videohdplayerjosie.R;
 import com.josieAlan.videohdplayerjosie.adapter.playlist_adapter;
 import com.josieAlan.videohdplayerjosie.databinding.ActivityVideoPlayerBinding;
+import com.josieAlan.videohdplayerjosie.model.CommonModel;
+import com.josieAlan.videohdplayerjosie.model.Users;
 import com.josieAlan.videohdplayerjosie.model.VideoItem;
 import com.josieAlan.videohdplayerjosie.services.floating;
 import com.josieAlan.videohdplayerjosie.utils.PreferenceUtil;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VideoPlayerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -86,6 +96,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 
     private Boolean lockstatus = false;
     private Boolean repeatstatus = false;
+    private Timer timer;
 
 
     private SeekBar vseekBar;
@@ -108,7 +119,12 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private TextView dspeed;
     private float brightnesses = -1;
     private PrefData prefData;
+    private DatabaseReference mDatabase;
+    Users users;
+    CommonModel commonModel;
+    private boolean isPaused = false;
     ProgressDialog progressDialog;
+    private int time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +138,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         progressDialog.setTitle("Loading"); // Setting Title
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         init();
 
         position = getIntent().getIntExtra("position", 0);
@@ -129,7 +146,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         current = getIntent().getLongExtra("current", 0);
         int ori = getResources().getConfiguration().orientation;
         if (ori == Configuration.ORIENTATION_PORTRAIT) {
-//            adView.setVisibility(View.GONE);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
         setPlayer();
@@ -137,6 +153,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         setBottomSheet();
         setListner();
         setdata();
+
+
 
         player.addListener(new Player.EventListener() {
             @Override
@@ -146,6 +164,32 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                     position = change;
                     title.setText(list.get(change).DISPLAY_NAME);
                     bottomSheetDialog.dismiss();
+                }
+
+            }
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                if (playWhenReady && playbackState == Player.STATE_READY) {
+                    isPaused = false;
+                } else if (playWhenReady) {
+                    isPaused = false;
+                } else {
+                    isPaused = true;
+                   /* if (time == 2) {
+                        if (prefData.isNetwork()) {
+                            if (prefData.detailAd != null && prefData.detailAd.isAdLoaded()) {
+                                progressDialog.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        time = 0;
+                                        progressDialog.dismiss();
+                                        prefData.detailAd.show();
+                                    }
+                                }, 1000);
+                            }
+                        }
+                    }*/
                 }
             }
 
@@ -170,7 +214,86 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                 return false;
             }
         });
+        startTimer();
+
+        if (!prefData.getUserId().equals("")) {
+
+            mDatabase.child("Common").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        commonModel = dataSnapshot.getValue(CommonModel.class);
+                        if (commonModel == null) {
+                            return;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            DatabaseReference userRef = mDatabase.child("users").child(prefData.getUserId());
+            ValueEventListener eventListner = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        users = dataSnapshot.getValue(Users.class);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            userRef.addValueEventListener(eventListner);
+        }
     }
+
+    private void startTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (!isPaused) {
+                    addMoney();
+                }
+                if (time < 2) {
+                    time++;
+                }
+            }
+        }, 60000, 60000);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (timer != null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    private void addMoney() {
+        if (!prefData.getUserId().equals("")) {
+            DatabaseReference userRef = mDatabase.child("users").child(prefData.getUserId());
+            Users user = new Users(users.username, users.coins + commonModel.appvideo, users.rupee, users.msg, users.reqnumber, users.userNumber);
+            userRef.setValue(user);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
 
     private void endGesture() {
         volumes = -1;
@@ -276,7 +399,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private void setPlayer() {
         player = ExoPlayerFactory.newSimpleInstance(this);
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
-                Util.getUserAgent(this, "all.format.video.hdplayer.hdvideoplayer.music.free.online.hd"));
+                Util.getUserAgent(this, "com.josieAlan.videohdplayerjosie"));
 
         if (list != null) {
             MediaSource[] videoSources = new MediaSource[list.size()];

@@ -2,11 +2,15 @@ package com.josieAlan.videohdplayerjosie;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
@@ -23,18 +27,18 @@ import com.josieAlan.videohdplayerjosie.model.ImageUploadInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrefData extends Application {
+public class PrefData extends MultiDexApplication {
     private static final String TAG = "PrefData";
-    public static String AppName = "mxhd_player";
+    public static String prefName = "mxhd_player";
     private static Context context;
     private static PrefData mInstance;
+
+    private static SharedPreferences mSharedPreferences;
+    private static SharedPreferences.Editor mEditor;
 
     public ImageUploadInfo referClass;
 
     public InterstitialAd homeAd;
-    public InterstitialAd detailAd;
-    public InterstitialAd moreAd;
-    public InterstitialAd subAd;
 
     public static synchronized PrefData getInstance(){
         if (mInstance == null){
@@ -47,10 +51,29 @@ public class PrefData extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         context = getApplicationContext();
         mInstance = this;
+        mSharedPreferences = getSharedPreferences(prefName, MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
         AudienceNetworkAds.initialize(this);
     }
+
+    public void setUserId(String id) {
+        mEditor.putString("_id", id).commit();
+    }
+
+    public String getUserId() {
+        return mSharedPreferences.getString("_id", "");
+    }
+    public void setReqUserId(String id) {
+        mEditor.putString("req_id", id).commit();
+    }
+
+    public String getReqUserId() {
+        return mSharedPreferences.getString("req_id", "");
+    }
+
 
     public boolean isNetwork() {
         NetworkInfo activeNetworkInfo = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
@@ -98,121 +121,13 @@ public class PrefData extends Application {
         });
     }
     public void showDetailAd(){
-       /* if (detailAd != null){
-            detailAd.destroy();
-            detailAd = null;
-        }
-        detailAd = new InterstitialAd(context,referClass.getFbFullKey2());
-        detailAd.loadAd();
-        detailAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
 
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                detailAd.loadAd();
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-
-            }
-        });*/
     }
     public void showMoreAd(){
-    /*    if (moreAd != null){
-            moreAd.destroy();
-            moreAd = null;
-        }
-        moreAd = new InterstitialAd(context,referClass.getFbFullKey3());
-        moreAd.loadAd();
-        moreAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
 
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                moreAd.loadAd();
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-
-            }
-        });*/
     }
     public void showSubAd(){
-       /* if (subAd != null){
-            subAd.destroy();
-            subAd = null;
-        }
-        subAd = new InterstitialAd(context,referClass.getFbFullKey4());
-        subAd.loadAd();
-        subAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
 
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                subAd.loadAd();
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-
-            }
-        });*/
     }
     public  void viewNative(NativeAd nativeAd2, View view, Context context) {
         try {
