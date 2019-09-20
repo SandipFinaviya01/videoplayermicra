@@ -103,19 +103,25 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             override fun run() {
                 if (time < 2) {
                     time++
-                }else if (time == 2){
+                } else if (time == 2) {
                     setVisibility();
 
                 }
             }
-        },6000,6000)
+        }, 6000, 6000)
 
     }
 
     private fun setVisibility() {
-        this.runOnUiThread(Runnable { if (commonModel!!.showreward == 1 && !binding!!.cardAppVideo.isVisible) {
-            binding!!.cardAppVideo.visibility = View.VISIBLE;
-        }  })
+        this.runOnUiThread(Runnable {
+            if (commonModel == null){
+
+            }else {
+                if (commonModel!!.showreward == 1 && !binding!!.cardAppVideo.isVisible) {
+                    binding!!.cardAppVideo.visibility = View.VISIBLE;
+                }
+            }
+        })
 
 
     }
@@ -153,10 +159,10 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     //create new user
-                    val common = CommonModel(commonModel.appvideo,commonModel.conversion
-                            ,commonModel.reward,commonModel.showreward,commonModel.minwithdraw,commonModel.userNumber+1,commonModel.showwallet);
+                    val common = CommonModel(commonModel.appvideo, commonModel.conversion
+                            , commonModel.reward, commonModel.showreward, commonModel.minwithdraw, commonModel.userNumber + 1, commonModel.showwallet);
                     mDatabase!!.child("Common").setValue(common)
-                    val users = Users(user.displayName, 0.0, 0.0,"",0,commonModel.userNumber)
+                    val users = Users(user.displayName, 0.0, 0.0, "", 0, commonModel.userNumber)
                     mDatabase!!.child("users").child(user.uid).setValue(users)
                 } else {
                     val users = dataSnapshot.getValue<Users>(Users::class.java)
@@ -182,12 +188,12 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     menu.clear()
                     try {
                         dataSnapshot.children.mapNotNullTo(menu) { return@mapNotNullTo it.getValue(RequestModel::class.java) }
                         handleRequestData();
-                    }catch (e : Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
 
@@ -206,7 +212,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
         binding!!.tvCoinsValue.text = MyNumFormatter.getFormatted(users.coins) + " coins"
         binding!!.tvMoneyValue.text = MyNumFormatter.getFormatted(users.rupee) + " rupee"
         binding!!.tvRequest.text = users.msg;
-        prefData!!.reqUserId = prefData!!.userId + "User-" +  users.userNumber
+        prefData!!.reqUserId = prefData!!.userId + "User-" + users.userNumber
     }
 
     private fun facebookLogin() {
@@ -298,7 +304,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
                     Toast.makeText(prefData, "data commonModel is null please create one", Toast.LENGTH_SHORT).show()
                     return
                 }
-                this@WalletActivity.setCommonData(commonModel,user)
+                this@WalletActivity.setCommonData(commonModel, user)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -317,14 +323,14 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
         if (v === binding!!.imgConvertoMoney) {
             //            showConverMoneyDiaolg((new BottomSheet(LayoutMode.WRAP_CONTENT)));
             showCustomViewDialog(BottomSheet(LayoutMode.WRAP_CONTENT))
-        }else if (v == binding!!.imgWithDrawMoney){
-            if (users.rupee < commonModel!!.minwithdraw){
+        } else if (v == binding!!.imgWithDrawMoney) {
+            if (users.rupee < commonModel!!.minwithdraw) {
                 val msg = "you don't have enough money\nminmum required is " + commonModel!!.minwithdraw + " Rupee";
                 handleMinWithDraw(msg);
-            }else{
+            } else {
                 enterMobileNo();
             }
-        }else if (v == binding!!.cardAppVideo){
+        } else if (v == binding!!.cardAppVideo) {
             if (mRewardedVideoAd.isLoaded) {
                 mRewardedVideoAd.show()
             }
@@ -361,8 +367,8 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
 
     private fun askForMoney(text: CharSequence) {
         MaterialDialog(this).show {
-            message(R.string.conversiontitile,"We are sending " + users.rupee + " Rupees to " + text + " paytm number")
-            positiveButton(android.R.string.ok){
+            message(R.string.conversiontitile, "We are sending " + users.rupee + " Rupees to " + text + " paytm number")
+            positiveButton(android.R.string.ok) {
                 sendMoneyRequest(text);
             }
             negativeButton(android.R.string.cancel)
@@ -373,18 +379,18 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
     private fun sendMoneyRequest(text: CharSequence) {
         val rupees = users.rupee;
         val msg = " Your request for withdraw " + users.coins + " Rupee on " + text + " is pending it may take upto 3-5 business day"
-        val user = Users(users.username, users.coins,0.0,msg,users.reqnumber+1,users.userNumber)
+        val user = Users(users.username, users.coins, 0.0, msg, users.reqnumber + 1, users.userNumber)
         mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
 
         val requestRef = mDatabase!!.child("Request").child(prefData!!.reqUserId)
-        val  requestChile = requestRef.child(users.reqnumber.toString() + "_Request");
-        val requestModel = RequestModel(text.toString(),rupees,"pending",users.reqnumber)
+        val requestChile = requestRef.child(users.reqnumber.toString() + "_Request");
+        val requestModel = RequestModel(text.toString(), rupees, "pending", users.reqnumber)
         requestChile.setValue(requestModel)
     }
 
     private fun handleMinWithDraw(msg: String) {
         MaterialDialog(this).show {
-            message(R.string.conversiontitile,msg)
+            message(R.string.conversiontitile, msg)
             positiveButton(android.R.string.ok)
             lifecycleOwner(this@WalletActivity)
         }
@@ -396,7 +402,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             customView(R.layout.conversion_dialog, scrollable = true, horizontalPadding = true)
             positiveButton(android.R.string.ok) { dialog ->
                 // Pull the password out of the custom view when the positive button is pressed
-                val user = Users(users.username, 0.0,users.rupee + (users.coins / commonModel!!.conversion),users.msg,users.reqnumber,users.userNumber)
+                val user = Users(users.username, 0.0, users.rupee + (users.coins / commonModel!!.conversion), users.msg, users.reqnumber, users.userNumber)
                 mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
             }
             negativeButton(android.R.string.cancel)
@@ -418,7 +424,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
 
     override fun onRewarded(reward: RewardItem) {
         // Reward the user.
-        val user = Users(users.username, users.coins + commonModel!!.reward,users.rupee,users.msg,users.reqnumber+1,users.userNumber)
+        val user = Users(users.username, users.coins + commonModel!!.reward, users.rupee, users.msg, users.reqnumber + 1, users.userNumber)
         mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
     }
 
@@ -445,6 +451,7 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
 
     override fun onRewardedVideoCompleted() {
     }
+
     override fun onPause() {
         super.onPause()
         mRewardedVideoAd.pause(this)
