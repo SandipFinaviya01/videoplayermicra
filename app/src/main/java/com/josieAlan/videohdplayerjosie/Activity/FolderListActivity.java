@@ -91,7 +91,7 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         binding = DataBindingUtil.setContentView(this,R.layout.activity_video_list);
         prefData = PrefData.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        AdSettings.addTestDevice("764f2cd5-1630-4a33-b384-10d94099b870");
+        AdSettings.addTestDevice("49b79231-5d29-4ad9-ba42-dbc4e058e2b2");
         progressDialog = new ProgressDialog(FolderListActivity.this,R.style.AppCompatAlertDialogStyle);
         progressDialog.setMessage("Wait while loading Ads..."); // Setting Message
         progressDialog.setTitle("Loading"); // Setting Title
