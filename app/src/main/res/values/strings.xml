@@ -6,5 +6,5 @@
     <string name="mobileTitle">Enter Mobile No</string>
     <string name="mobileMsg">Enter Your paytm register mobile number we will send money within 3–5 business day</string>
     <string name="refund">if you enter wrong number which are not register in paytm do not worry in that case we will give you refund</string>
-    <string name="adId">ca-app-pub-7014688784067346~1977282143</string>
+
 </resources>

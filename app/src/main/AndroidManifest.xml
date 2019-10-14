@@ -94,9 +94,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/adId"/>
 </application>
 
 </manifest>

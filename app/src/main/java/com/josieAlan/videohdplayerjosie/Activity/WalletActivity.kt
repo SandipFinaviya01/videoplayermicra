@@ -29,11 +29,6 @@ import com.facebook.FacebookSdk
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.reward.RewardItem
-import com.google.android.gms.ads.reward.RewardedVideoAd
-import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -53,7 +48,7 @@ import com.josieAlan.videohdplayerjosie.utils.MyNumFormatter
 import java.lang.Exception
 import java.util.*
 
-class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdListener {
+class WalletActivity : BaseActivity(), View.OnClickListener {
 
     private var prefData: PrefData? = null
 
@@ -73,7 +68,6 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
     private lateinit var users: Users;
     private val menu: MutableList<RequestModel> = mutableListOf()
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var mRewardedVideoAd: RewardedVideoAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,9 +78,6 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
         prefData = PrefData.getInstance()
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create()
-
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
-        mRewardedVideoAd.rewardedVideoAdListener = this
 
         facebookLogin()
         setData()
@@ -127,8 +118,6 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
     }
 
     private fun loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-7014688784067346/8655398808",
-                AdRequest.Builder().addTestDevice("57E22DE3F9AFCB046E7DF0D50266D222").build())
     }
 
     private fun setListner() {
@@ -330,10 +319,6 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
             } else {
                 enterMobileNo();
             }
-        } else if (v == binding!!.cardAppVideo) {
-            if (mRewardedVideoAd.isLoaded) {
-                mRewardedVideoAd.show()
-            }
         }
     }
 
@@ -422,48 +407,6 @@ class WalletActivity : BaseActivity(), View.OnClickListener, RewardedVideoAdList
         private val TAG = "FacebookLogin"
     }
 
-    override fun onRewarded(reward: RewardItem) {
-        // Reward the user.
-        val user = Users(users.username, users.coins + commonModel!!.reward, users.rupee, users.msg, users.reqnumber + 1, users.userNumber)
-        mDatabase!!.child("users").child(prefData!!.userId).setValue(user)
-    }
 
-    override fun onRewardedVideoAdLeftApplication() {
-    }
 
-    override fun onRewardedVideoAdClosed() {
-        loadRewardedVideoAd();
-        binding!!.cardAppVideo.visibility = View.GONE;
-        time = 0;
-    }
-
-    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
-    }
-
-    override fun onRewardedVideoAdLoaded() {
-    }
-
-    override fun onRewardedVideoAdOpened() {
-    }
-
-    override fun onRewardedVideoStarted() {
-    }
-
-    override fun onRewardedVideoCompleted() {
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mRewardedVideoAd.pause(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mRewardedVideoAd.resume(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mRewardedVideoAd.destroy(this)
-    }
 }
