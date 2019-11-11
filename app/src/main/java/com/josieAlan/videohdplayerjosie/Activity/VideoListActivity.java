@@ -125,6 +125,9 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
 
 
     private void showBanner() {
+        if (prefData.referClass == null){
+            return;
+        }
         adViews = new AdView(this, prefData.referClass.fbBannerKey, AdSize.BANNER_HEIGHT_50);
 
         binding.bannerContainer.addView(adViews);
@@ -160,6 +163,9 @@ public class VideoListActivity extends AppCompatActivity implements VideoListSub
         this.adView = (CardView) getLayoutInflater().inflate(R.layout.native_ad_unit, binding.nativeAdContainer, false);
         binding.nativeAdContainer.addView(adView);
         binding.nativeAdContainer.setVisibility(View.GONE);
+        if (prefData.referClass == null){
+            return;
+        }
         this.nativeAd = new NativeAd((Context) this, prefData.referClass.fbNativeKey);
         this.nativeAd.setAdListener(new NativeAdListener() {
             public void onAdClicked(Ad ad) {

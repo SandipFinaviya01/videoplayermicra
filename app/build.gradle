@@ -13,8 +13,8 @@ android {
         applicationId "com.joiseAlan.videohdplayerjosie"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.8"
+        versionCode 11
+        versionName "2.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

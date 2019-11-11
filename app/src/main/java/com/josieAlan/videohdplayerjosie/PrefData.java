@@ -85,7 +85,9 @@ public class PrefData extends MultiDexApplication {
             homeAd.destroy();
             homeAd = null;
         }
-
+        if (referClass == null){
+            return;
+        }
         homeAd = new InterstitialAd(context,referClass.getFbFullKey());
         homeAd.loadAd();
         homeAd.setAdListener(new InterstitialAdListener() {

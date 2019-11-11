@@ -98,8 +98,10 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
         if (prefData.isNetwork()){
-            showBanner();
-            loadNativeAds();
+            if (prefData.referClass != null) {
+                showBanner();
+                loadNativeAds();
+            }
             if (prefData.homeAd != null && prefData.homeAd.isAdLoaded()) {
 
                 if (progressDialog.isShowing()) {
@@ -221,6 +223,9 @@ public class FolderListActivity extends AppCompatActivity implements VideoListHo
         this.adView = (CardView) getLayoutInflater().inflate(R.layout.native_ad_unit, binding.nativeAdContainer, false);
         binding.nativeAdContainer.addView(adView);
         binding.nativeAdContainer.setVisibility(View.GONE);
+        if (prefData.referClass == null){
+            return;
+        }
         this.nativeAd = new NativeAd((Context) this, prefData.referClass.fbNativeKey);
         this.nativeAd.setAdListener(new NativeAdListener() {
             public void onAdClicked(Ad ad) {
