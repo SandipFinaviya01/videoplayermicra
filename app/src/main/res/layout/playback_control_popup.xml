@@ -25,7 +25,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@id/exo_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -37,19 +36,18 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
-            <com.google.android.exoplayer2.ui.DefaultTimeBar
-                android:id="@id/exo_progress"
-                android:layout_width="0dp"
-                android:layout_height="16dp"
-                android:layout_weight="7"
-                app:bar_height="2dp"
-                app:buffered_color="#FFFFFFFF"
-                app:played_color="@color/timecolor"
-                app:scrubber_color="@color/timecolor"
-                app:unplayed_color="#FFFFFFFF" />
+<!--            <com.google.android.exoplayer2.ui.DefaultTimeBar-->
+<!--                android:id="@id/exo_progress"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="16dp"-->
+<!--                android:layout_weight="7"-->
+<!--                app:bar_height="2dp"-->
+<!--                app:buffered_color="#FFFFFFFF"-->
+<!--                app:played_color="@color/timecolor"-->
+<!--                app:scrubber_color="@color/timecolor"-->
+<!--                app:unplayed_color="#FFFFFFFF" />-->
 
             <TextView
-                android:id="@id/exo_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -73,7 +71,6 @@
 
 
             <ImageButton
-                android:id="@id/exo_rew"
                 style="@style/Rewind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +78,6 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:id="@id/exo_prev"
                 style="@style/Previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +85,6 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:id="@id/exo_play"
                 style="@style/Play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +92,6 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:id="@id/exo_pause"
                 style="@style/Pause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,7 +99,6 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:id="@id/exo_next"
                 style="@style/Next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +106,6 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:id="@id/exo_ffwd"
                 style="@style/Forward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

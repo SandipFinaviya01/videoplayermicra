@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "565696839867",
-    "firebase_url": "https://forece4gnet.firebaseio.com",
-    "project_id": "forece4gnet",
-    "storage_bucket": "forece4gnet.appspot.com"
+    "project_number": "394917392917",
+    "firebase_url": "https://shreeji-developer-app-default-rtdb.firebaseio.com",
+    "project_id": "shreeji-developer-app",
+    "storage_bucket": "shreeji-developer-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565696839867:android:5511897cbab1e82a",
+        "mobilesdk_app_id": "1:394917392917:android:cbe4f0c971f1b27ef3541c",
         "android_client_info": {
-          "package_name": "com.allloanapp"
+          "package_name": "com.good.hdvideoplayer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "565696839867-bub884671bjlgl73u6fbn9nppkvsbank.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.allloanapp",
-            "certificate_hash": "2d1e954c18ba1acd395b6cd6a9782cea7f71dd5c"
-          }
-        },
-        {
-          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+          "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
+          "current_key": "AIzaSyC5Nx4IpKzdIjPQCqGJJzHkz12395vPjxg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+              "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -45,35 +37,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565696839867:android:3088052f0da8548c",
+        "mobilesdk_app_id": "1:394917392917:android:ff98425a74e4ef04f3541c",
         "android_client_info": {
-          "package_name": "com.comjosieAlan.forece4gnet"
+          "package_name": "com.good.instagridmaker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "565696839867-v0drebjr4udrbe61uf1t9tqtq35eigdj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.comjosieAlan.forece4gnet",
-            "certificate_hash": "2d1e954c18ba1acd395b6cd6a9782cea7f71dd5c"
-          }
-        },
-        {
-          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+          "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
+          "current_key": "AIzaSyC5Nx4IpKzdIjPQCqGJJzHkz12395vPjxg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+              "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -82,109 +66,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565696839867:android:fa6d04213eb5b9ff",
+        "mobilesdk_app_id": "1:394917392917:android:b287505de0809f1bf3541c",
         "android_client_info": {
-          "package_name": "com.comjosieAlan.internetspeedmeter"
+          "package_name": "com.textstyle.whatschat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "565696839867-p0p3o8jrcjvhqviisnn2ccp6jqbu55sb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.comjosieAlan.internetspeedmeter",
-            "certificate_hash": "2d1e954c18ba1acd395b6cd6a9782cea7f71dd5c"
-          }
-        },
-        {
-          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+          "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
+          "current_key": "AIzaSyC5Nx4IpKzdIjPQCqGJJzHkz12395vPjxg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:565696839867:android:a5abd423bea7037c",
-        "android_client_info": {
-          "package_name": "com.joiseAlan.videohdplayerjosie"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "565696839867-fi37oe2kefbo1j5bijp92hb311fq2ipa.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.joiseAlan.videohdplayerjosie",
-            "certificate_hash": "9ce258900841bcb5bb1a9aae802d9a62969d8c00"
-          }
-        },
-        {
-          "client_id": "565696839867-06mpnn5982pqa0cs3r2mejgshrjboibk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.joiseAlan.videohdplayerjosie",
-            "certificate_hash": "2d1e954c18ba1acd395b6cd6a9782cea7f71dd5c"
-          }
-        },
-        {
-          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:565696839867:android:3a905e8246ae67f6",
-        "android_client_info": {
-          "package_name": "com.micra.forece4gnet"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC-A-_39mnb5U5oazu0eeb-7JzY8PCII2Q"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "565696839867-if09if2kublmvpgfvmsonqm13t83gukt.apps.googleusercontent.com",
+              "client_id": "394917392917-a3o793fk7o88596aqblnmssqtqqiscqe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

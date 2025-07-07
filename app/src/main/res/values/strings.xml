@@ -1,10 +1,46 @@
 <resources>
     <string name="app_name">Super HD Max Player</string>
-    <string name="name">hdmax</string>
-    <string name="app_id">2094283264213014</string>
+    <string name="name">hdmaxplayer</string>
+    <string name="app_id">268559897788562</string>
+    <string name="app_id_admob">ca-app-pub-1206563079214517~7540441183</string>
+    <string name="ad_attribution">Ad</string>
+<!--
+FacebookAds
+
+  <string name="fullad1">268559897788562_268564384454780</string>
+
+    <string name="fbNative1">268559897788562_268563767788175</string>
+    <string name="fbNative2">268559897788562_268563757788176</string>
+
+    <string name="fbBanner1">268559897788562_268564724454746</string>
+    <string name="fbBanner2">268559897788562_268564714454747</string>
+
+-->
+
+    <string name="fullad1">123</string>
+
+    <string name="fbNative1">123</string>
+    <string name="fbNative2">123</string>
+
+    <string name="fbBanner1">123</string>
+    <string name="fbBanner2">123</string>
+
+    <string name="gbanner1">123</string>
+    <string name="gbanner2">123</string>
+
+    <string name="gNative1">123</string>
+    <string name="gNative2">123</string>
+
+    <string name="gFull1">123</string>
+
     <string name="conversiontitile">Error</string>
     <string name="mobileTitle">Enter Mobile No</string>
     <string name="mobileMsg">Enter Your paytm register mobile number we will send money within 3–5 business day</string>
     <string name="refund">if you enter wrong number which are not register in paytm do not worry in that case we will give you refund</string>
+    <string name="shareapp">Share app</string>
+    <string name="rate">Rate</string>
+    <string name="more">More app</string>
+    <string name="ads">Hot app</string>
+
 
 </resources>

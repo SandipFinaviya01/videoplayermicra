@@ -7,23 +7,23 @@
         android:keepScreenOn="true"
         android:background="@color/colorPrimaryDark">
 
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/player_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:controller_layout_id="@layout/playback_control"
-            app:fastforward_increment="10000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:repeat_toggle_modes="one"
-            app:rewind_increment="10000"
-            app:show_timeout="3000"
-            app:use_controller="true">
+<!--        <androidx.media3.ui.PlayerView-->
+<!--            android:id="@+id/player_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:controller_layout_id="@layout/playback_control"-->
+<!--            app:fastforward_increment="10000"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:repeat_toggle_modes="one"-->
+<!--            app:rewind_increment="10000"-->
+<!--            app:show_timeout="3000"-->
+<!--            app:use_controller="true" />-->
 
-        </com.google.android.exoplayer2.ui.PlayerView>
+
         <FrameLayout
             android:id="@+id/app_video_center_box"
             android:layout_width="wrap_content"
@@ -142,9 +142,7 @@
             layout="@layout/playlist_sheet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/player_view"
-            app:layout_constraintStart_toStartOf="@+id/player_view" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/text"
@@ -155,9 +153,8 @@
             android:textSize="30sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/sheet"
-            app:layout_constraintEnd_toEndOf="@+id/player_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/player_view" />
+          />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

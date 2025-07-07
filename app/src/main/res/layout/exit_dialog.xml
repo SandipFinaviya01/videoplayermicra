@@ -1,76 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_5sdp"
-    card_view:cardCornerRadius="@dimen/_5sdp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <RelativeLayout
+        android:id="@+id/lintxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AD"
+            android:visibility="invisible"
+            android:textSize="18dp"
+            android:textColor="#FF0707"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_gravity="center"
+            android:textColor="@color/themeColor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lotti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lintxt">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            app:lottie_fileName="32057-thank-you.json"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:layout_below="@id/lotti"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvErrorMassgae"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="left"
-            android:text="Are you sure you want to exit?"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_18sdp"
-            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="60dp"
+            android:text="Yes"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_height="35dp" />
 
-        <TextView
-            android:id="@+id/tvRate"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center"
-            android:text="would you like to more app?"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_15sdp"
-            android:visibility="gone" />
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="60dp"
+            android:text="No"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            android:layout_height="35dp" />
 
-        <LinearLayout
-            android:id="@+id/ll_native_ad_container"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvYes"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_7sdp"
-                android:text="Yes"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_16sdp" />
-
-            <TextView
-                android:id="@+id/tvNo"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_25sdp"
-                android:gravity="center"
-                android:paddingTop="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_7sdp"
-                android:text="No"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_16sdp" />
-        </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="fill_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="@dimen/_5sdp"-->
+<!--    card_view:cardCornerRadius="@dimen/_5sdp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/white"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvErrorMassgae"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="fill_parent"-->
+<!--            android:layout_marginLeft="@dimen/_15sdp"-->
+<!--            android:layout_marginTop="@dimen/_10sdp"-->
+<!--            android:gravity="left"-->
+<!--            android:text="Are you sure you want to exit?"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="@dimen/_18sdp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvRate"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="fill_parent"-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="would you like to more app?"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="@dimen/_15sdp"-->
+<!--            android:visibility="gone" />-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_native_ad_container"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_15sdp"-->
+<!--            android:layout_marginBottom="@dimen/_15sdp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvYes"-->
+<!--                android:layout_width="@dimen/_100sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingTop="@dimen/_7sdp"-->
+<!--                android:paddingBottom="@dimen/_7sdp"-->
+<!--                android:text="Yes"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="@dimen/_16sdp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvNo"-->
+<!--                android:layout_width="@dimen/_100sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingTop="@dimen/_7sdp"-->
+<!--                android:paddingBottom="@dimen/_7sdp"-->
+<!--                android:text="No"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="@dimen/_16sdp" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+<!--</androidx.cardview.widget.CardView>-->

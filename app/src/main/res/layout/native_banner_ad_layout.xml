@@ -32,12 +32,12 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white">
 
-        <com.facebook.ads.AdIconView
-            android:id="@+id/nativeIconView"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_alignParentLeft="true"
-            android:gravity="center" />
+<!--        <com.facebook.ads.AdIconView-->
+<!--            android:id="@+id/nativeIconView"-->
+<!--            android:layout_width="@dimen/_50sdp"-->
+<!--            android:layout_height="@dimen/_50sdp"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:gravity="center" />-->
 
         <LinearLayout
             android:layout_width="fill_parent"

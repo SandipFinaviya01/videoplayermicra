@@ -48,52 +48,52 @@
     </style>
 
 
-    <style name="Play" parent="@style/ExoMediaButton.Play">
+    <style name="Play">
         <item name="android:src">@drawable/play</item>
-        <item name="android:contentDescription">@string/exo_controls_play_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
 
-    <style name="Pause" parent="@style/ExoMediaButton.Pause">
+    <style name="Pause">
         <item name="android:src">@drawable/pause</item>
-        <item name="android:contentDescription">@string/exo_controls_pause_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
-    <style name="Next" parent="@style/ExoMediaButton.Next">
+    <style name="Next">
         <item name="android:src">@drawable/next</item>
-        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
 
-    <style name="Previous" parent="@style/ExoMediaButton.Previous">
+    <style name="Previous">
         <item name="android:src">@drawable/previous</item>
-        <item name="android:contentDescription">@string/exo_controls_previous_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
-    <style name="Rewind" parent="@style/ExoMediaButton.Rewind">
+    <style name="Rewind" >
         <item name="android:src">@drawable/rewind</item>
-        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
 
-    <style name="Forward" parent="@style/ExoMediaButton.FastForward">
+    <style name="Forward">
         <item name="android:src">@drawable/forward</item>
-        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+        <item name="android:contentDescription"> </item>
     </style>
 
-    <style name="Volume" parent="@style/ExoMediaButton">
+    <style name="Volume" >
         <item name="android:src">@drawable/volume</item>
     </style>
 
-    <style name="Full" parent="@style/ExoMediaButton">
+    <style name="Full">
         <item name="android:src">@drawable/full</item>
     </style>
 
-    <style name="Close" parent="@style/ExoMediaButton">
+    <style name="Close">
         <item name="android:src">@drawable/popup_close</item>
     </style>
 
-    <style name="Crop" parent="@style/ExoMediaButton">
+    <style name="Crop">
         <item name="android:src">@drawable/full</item>
     </style>
 
@@ -106,5 +106,31 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/themeColor</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.AdAttribution">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:text">@string/ad_attribution</item>
+        <item name="android:background">#FFCC66</item>
+        <item name="android:width">15dp</item>
+        <item name="android:height">15dp</item>
+    </style>
 
 </resources>

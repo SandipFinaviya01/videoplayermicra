@@ -1,4 +1,4 @@
-package com.josieAlan.videohdplayerjosie;
+package com.good.hdvideoplayer;
 
 import org.junit.Test;
 
