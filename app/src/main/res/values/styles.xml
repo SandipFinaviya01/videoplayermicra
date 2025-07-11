@@ -4,17 +4,22 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:actionOverflowButtonStyle">@style/OverflowMenuStyle</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/themeColor</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">@color/themeColor</item>
-        <item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/themeColor</item>
         <item name="actionModeCloseDrawable">@drawable/cancel</item>
         <item name="actionModeStyle">@style/ActionModeStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@android:color/black</item>
+    </style>
+
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorPrimary</item>
@@ -132,5 +137,14 @@
         <item name="android:width">15dp</item>
         <item name="android:height">15dp</item>
     </style>
+
+    <style name="FilterChip">
+        <item name="android:background">@drawable/chip_background</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
 
 </resources>

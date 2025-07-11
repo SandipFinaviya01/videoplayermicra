@@ -7,21 +7,16 @@
         android:keepScreenOn="true"
         android:background="@color/colorPrimaryDark">
 
-<!--        <androidx.media3.ui.PlayerView-->
-<!--            android:id="@+id/player_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:controller_layout_id="@layout/playback_control"-->
-<!--            app:fastforward_increment="10000"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:repeat_toggle_modes="one"-->
-<!--            app:rewind_increment="10000"-->
-<!--            app:show_timeout="3000"-->
-<!--            app:use_controller="true" />-->
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:show_buffering="when_playing"
+            app:show_timeout="5000"
+            app:resize_mode="fit"
+            app:use_controller="true" />
 
 
         <FrameLayout
@@ -135,7 +130,29 @@
             </LinearLayout>
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/pspeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.0X"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:elevation="10dp"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             android:id="@+id/sheet"

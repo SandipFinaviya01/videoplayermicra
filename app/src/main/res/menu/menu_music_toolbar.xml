@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_select"
+        android:title="Select"
+        android:icon="@drawable/ic_select"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_network_stream"
+        android:title="Network Stream"
+        android:icon="@drawable/ic_network"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_theme"
+        android:title="Theme"
+        android:icon="@drawable/ic_theme"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_widgets"
+        android:title="Widgets"
+        android:icon="@drawable/ic_widgets"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_equalizer"
+        android:title="Equalizer"
+        android:icon="@drawable/ic_equalizer"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_remove_ads"
+        android:title="Remove Ads"
+        android:icon="@drawable/ic_remove_ads"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search_black"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+  
+</menu>

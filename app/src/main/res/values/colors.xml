@@ -9,4 +9,6 @@
     <color name="white">#ffffff</color>
     <color name="timecolor">#845311</color>
     <color name="bg">#E7F2F8</color>
+    <color name="yourPrimaryColor">#FF4081</color> <!-- Pink/Primary -->
+    <color name="gray">#888888</color> <!-- Light gray for unselected -->
 </resources>

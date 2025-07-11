@@ -3,181 +3,271 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/grediantbgtool"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:collapseIcon="@drawable/back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="@string/app_name"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
-                app:titleTextColor="@color/black">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/walletSection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:id="@+id/imggift"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:src="@drawable/ic_gift"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tvAmount"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:text="0"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/dollar"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/dollar"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_9sdp"
-                        android:background="@drawable/dollar"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
+        <!-- Default Video UI -->
+        <LinearLayout
+            android:id="@+id/videoLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:scrollbars="none">
+            android:layout_above="@+id/bottomTabs"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <!-- Toolbar & AppBar -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/grediantbgtool"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme"
+                    app:collapseIcon="@drawable/back"
+                    app:title="@string/app_name"
+                    app:titleTextAppearance="@style/Toolbar.TitleText"
+                    app:titleTextColor="@color/black">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/walletSection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/imggift"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:src="@drawable/ic_gift"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tvAmount"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16sdp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/dollar"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dollar"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/dollar"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.Toolbar>
+
+                <!-- Filter Chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F2F2F2"
+                    android:fillViewport="true"
+                    android:padding="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/filterChipContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/chip_recent"
+                            style="@style/FilterChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recent" />
+
+                        <TextView
+                            android:id="@+id/chip_network"
+                            style="@style/FilterChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Network" />
+
+                        <TextView
+                            android:id="@+id/chip_size"
+                            style="@style/FilterChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3.2 GB" />
+
+                        <TextView
+                            android:id="@+id/chip_downloader"
+                            style="@style/FilterChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Downloader" />
+
+                        <TextView
+                            android:id="@+id/chip_files"
+                            style="@style/FilterChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Files App" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- Content Scroll -->
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
                         android:id="@+id/adView"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:id="@+id/banner_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent" />
+                        android:orientation="vertical" />
 
                     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                         android:id="@+id/swipeToRefresh"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_450sdp">
+                        android:layout_height="@dimen/_430sdp">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/videoRecycler"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:divider="@null"
-                            android:dividerHeight="0dp"
                             android:overScrollMode="never"
-                            android:scrollbarSize="5dp"
                             android:scrollbars="vertical" />
-
                     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
                 </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
 
-                <com.facebook.ads.NativeAdLayout
-                    android:id="@+id/nativeBannerAdContainer"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+        <!-- Fragment Container (Music / Playlist) -->
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
-                <RelativeLayout
-                    android:id="@+id/adlayout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:visibility="visible">
+        <!-- Bottom Tabs for Music & Playlist -->
+        <LinearLayout
+            android:id="@+id/bottomTabs"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:elevation="6dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Video"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_music"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="Video"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
-                        <com.facebook.ads.NativeAdLayout
-                            android:id="@+id/nativeAdContainer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:paddingBottom="@dimen/_5sdp" />
+            <TextView
+                android:id="@+id/tab_music"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_music"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="Music"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
-                    </ScrollView>
+            <TextView
+                android:id="@+id/tab_playlist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_playlist"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="Playlist"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <FrameLayout
-                            android:id="@+id/fl_adplaceholder"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </ScrollView>
-
-                </RelativeLayout>
+    </RelativeLayout>
+</layout>
 
 
-            </LinearLayout>
+    <!--                <com.facebook.ads.NativeAdLayout-->
+    <!--                    android:id="@+id/nativeBannerAdContainer"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--                    app:layout_constraintRight_toRightOf="parent" />-->
 
-        </androidx.core.widget.NestedScrollView>
+    <!--                <RelativeLayout-->
+    <!--                    android:id="@+id/adlayout"-->
+    <!--                    android:layout_width="fill_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_margin="5dp"-->
+    <!--                    android:visibility="visible">-->
 
-    </LinearLayout>
+    <!--&lt;!&ndash;                    <ScrollView&ndash;&gt;-->
+    <!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                        android:layout_height="wrap_content">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;                        <com.facebook.ads.NativeAdLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;                            android:id="@+id/nativeAdContainer"&ndash;&gt;-->
+    <!--&lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                            android:orientation="vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;                            android:paddingBottom="@dimen/_5sdp" />&ndash;&gt;-->
+    <!--&lt;!&ndash;                    </ScrollView>&ndash;&gt;-->
+
+    <!--                    <ScrollView-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content">-->
+
+    <!--                        <FrameLayout-->
+    <!--                            android:id="@+id/fl_adplaceholder"-->
+    <!--                            android:layout_width="match_parent"-->
+    <!--                            android:layout_height="wrap_content" />-->
+    <!--                    </ScrollView>-->
+    <!--                </RelativeLayout>-->
 
 
     <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
@@ -307,6 +397,3 @@
     <!--                        app:layout_constraintRight_toRightOf="parent" />-->
 
     <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-</layout>

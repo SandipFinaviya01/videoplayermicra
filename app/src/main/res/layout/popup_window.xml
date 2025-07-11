@@ -5,6 +5,18 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
 
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_170sdp"
+        app:controller_layout_id="@layout/playback_control_popup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:show_timeout="3000"
+        app:use_controller="true" />
+
 <!--    <com.google.android.exoplayer2.ui.PlayerView-->
 <!--        android:id="@+id/player_view"-->
 <!--        android:layout_width="@dimen/_220sdp"-->

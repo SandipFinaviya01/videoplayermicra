@@ -2,34 +2,31 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Share -->
     <item
-        android:id="@+id/action_info"
+        android:id="@+id/ic_share"
+        android:title="Share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom" />
+
+    <!-- Rate -->
+    <item
+        android:id="@+id/ic_rate"
+        android:title="Rate"
+        android:icon="@drawable/ic_star"
+        app:showAsAction="ifRoom" />
+
+    <!-- More Apps -->
+    <item
+        android:id="@+id/ic_more"
+        android:title="More Apps"
         android:icon="@drawable/moreic"
-        android:title="More"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom" />
 
-        <menu>
-            <item
-                android:id="@+id/ic_share"
-                android:title="Share"
-                app:showAsAction="ifRoom" />
-
-            <item
-                android:id="@+id/ic_rate"
-                android:title="Rate"
-                app:showAsAction="ifRoom" />
-
-            <item
-                android:id="@+id/ic_more"
-                android:title="More"
-                app:showAsAction="ifRoom" />
-
-            <item
-                android:id="@+id/menu_switch_layout"
-                android:title="switch"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_span_1"/>
-        </menu>
-
-    </item>
+    <!-- Switch Layout -->
+    <item
+        android:id="@+id/menu_switch_layout"
+        android:title="Switch Layout"
+        android:icon="@drawable/ic_span_1"
+        app:showAsAction="always" />
 </menu>

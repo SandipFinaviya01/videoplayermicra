@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fillViewport="true"
+    tools:context=".Activity.MusicPlayerActivity">
+
+
+        <RelativeLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+                <!-- Album Art -->
+                <ImageView
+                    android:id="@+id/imgAlbumArt"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_music_placeholder"
+                    android:background="@drawable/bg_album_circle" />
+
+                <!-- Song Title -->
+                <TextView
+                    android:id="@+id/tvSongTitle"
+                    android:layout_below="@id/imgAlbumArt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Song Title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <!-- Artist Name -->
+                <TextView
+                    android:id="@+id/tvArtist"
+                    android:layout_below="@id/tvSongTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Artist Name"
+                    android:textColor="#CCCCCC"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- SeekBar -->
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_below="@id/tvArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:progressDrawable="@drawable/seekbar_progress" />
+
+                <!-- Time Labels -->
+                <LinearLayout
+                    android:id="@+id/timerLayout"
+                    android:layout_below="@id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp">
+
+                        <TextView
+                            android:id="@+id/tvCurrentTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="00:00"
+                            android:textColor="#AAAAAA" />
+
+                        <TextView
+                            android:id="@+id/tvTotalDuration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="03:45"
+                            android:textColor="#AAAAAA" />
+                </LinearLayout>
+
+                <!-- Visualizer -->
+                <com.good.hdvideoplayer.AudioVisualizerView
+                    android:id="@+id/visualizerView"
+                    android:layout_below="@id/timerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Controls -->
+                <LinearLayout
+                    android:id="@+id/controlsLayout"
+                    android:layout_below="@id/visualizerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="5">
+
+                        <ImageButton
+                            android:id="@+id/btnRepeat"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_repeat"
+                            android:background="@android:color/transparent"
+                            app:tint="#FFFFFF" />
+
+                        <ImageButton
+                            android:id="@+id/btnPrevious"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_prev"
+                            android:background="@android:color/transparent"
+                            app:tint="#FFFFFF" />
+
+                        <ImageButton
+                            android:id="@+id/btnPlayPause"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_pause"
+                            android:background="@android:color/transparent"
+                            app:tint="#FFFFFF" />
+
+                        <ImageButton
+                            android:id="@+id/btnNext"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_next"
+                            android:background="@android:color/transparent"
+                            app:tint="#FFFFFF" />
+
+                        <ImageButton
+                            android:id="@+id/btnShuffle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_shuffle"
+                            android:background="@android:color/transparent"
+                            app:tint="#FFFFFF" />
+                </LinearLayout>
+
+        </RelativeLayout>
+</ScrollView>
